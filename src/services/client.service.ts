@@ -27,9 +27,9 @@ export async function fetchClients() {
     });
 }
 
-export async function updateClient(data: ClientUpdateRequest) {
+export async function updateClient(_id: string, data: ClientUpdateRequest) {
   return apiClient
-    .patch('/clients', data)
+    .patch(`/clients/${_id}`, data)
     .then((response) => {
       if (response) {
         return response.data;
@@ -38,9 +38,9 @@ export async function updateClient(data: ClientUpdateRequest) {
     });
 }
 
-export async function deleteClient(data: ClientDeleteRequest) {
+export async function deleteClient(_id: string) {
   return apiClient
-    .delete('/clients/:id')
+    .delete(`/clients/${_id}`)
     .then((response) => {
       if (response) {
         return response.data;
