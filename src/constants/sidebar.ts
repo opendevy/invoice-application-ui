@@ -6,6 +6,10 @@ export const managerSidebarItems = [
   {
     title: 'Employee List',
     url: '/employees'
+  },
+  {
+    title: 'Project List',
+    url: '/projects'
   }
 ];
 

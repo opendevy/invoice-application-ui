@@ -13,6 +13,7 @@ import Employees from "./pages/Employees";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
 import ResetPassword from "./pages/Auth/ResetPassword";
 import Accountant from "./pages/Accountant";
+import ProjectPage from "./pages/Project";
 
 const theme = createTheme({});
 
@@ -30,6 +31,7 @@ const App = memo(() => {
                   <Route exact path={ROUTES.CLIENT} component={Clients} />
                   <Route exact path={ROUTES.EMPLOYEE} component={Employees} />
                   <Route path={ROUTES.EMPLOYEE_DETAIL} component={Employees} />
+                  <Route path={ROUTES.PROJECT} component={ProjectPage} />
                   <Redirect to={ROUTES.CLIENT} />
                 </Switch>
               </FullLayout>
