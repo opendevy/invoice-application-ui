@@ -29,6 +29,7 @@ const App = memo(() => {
                 <Switch>
                   <Route exact path={ROUTES.CLIENT} component={Clients} />
                   <Route exact path={ROUTES.EMPLOYEE} component={Employees} />
+                  <Route path={ROUTES.EMPLOYEE_DETAIL} component={Employees} />
                   <Redirect to={ROUTES.CLIENT} />
                 </Switch>
               </FullLayout>

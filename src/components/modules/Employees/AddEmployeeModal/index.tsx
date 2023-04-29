@@ -5,8 +5,8 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useCreateClientAction } from "../../../../hooks/redux";
-import {ClientCreateRequest} from "../../../../interfaces";
+import { useCreateEmployeeAction } from "../../../../hooks/redux";
+import {EmployeeCreateRequest} from "../../../../interfaces";
 
 interface IAddEmployeeModalProps {
   isOpened: boolean;
@@ -17,8 +17,8 @@ const AddEmployeeModal: FC<IAddEmployeeModalProps> = ({
   isOpened,
   handleModal
 }) => {
-  const addNewClient = useCreateClientAction();
-  const [newEmployeeData, setNewEmployeeData] = useState<ClientCreateRequest>({
+  const addNewEmployee = useCreateEmployeeAction();
+  const [newEmployeeData, setNewEmployeeData] = useState<EmployeeCreateRequest>({
     name: ''
   });
 
@@ -27,7 +27,7 @@ const AddEmployeeModal: FC<IAddEmployeeModalProps> = ({
   };
 
   const handleSave = async () => {
-    await addNewClient(newEmployeeData);
+    await addNewEmployee(newEmployeeData);
     handleClose();
   };
 

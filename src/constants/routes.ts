@@ -7,5 +7,6 @@ export const ROUTES = {
   },
   CLIENT: "/clients",
   ACCOUNTANT: "/accountant",
-  EMPLOYEE: "/employees"
+  EMPLOYEE: "/employees",
+  EMPLOYEE_DETAIL: "/employees/:id"
 };
