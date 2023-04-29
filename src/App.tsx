@@ -1,7 +1,7 @@
-import React, {memo} from "react";
-import {Redirect, Switch, Route} from "react-router-dom";
-import {createTheme, ThemeProvider} from "@mui/material";
-import {ROUTES} from "./constants";
+import React, { memo } from "react";
+import { Redirect, Switch, Route } from "react-router-dom";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { ROUTES } from "./constants";
 import Register from "./pages/Auth/Register";
 import Login from "./pages/Auth/Login";
 import AuthProvider from "./providers/AuthProvider";

@@ -1,13 +1,22 @@
-import React, {useState, FC, useEffect} from 'react';
+import React, { useState, FC, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import {useClientState, useCreateEmployeeAction, useFetchClientsAction} from "../../../../hooks/redux";
-import {EmployeeCreateRequest} from "../../../../interfaces";
-import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
+import {
+  useCreateProjectAction,
+  useFetchProjectsAction,
+  useClientState
+} from "../../../../hooks/redux";
+import { ProjectCreateRequest } from "../../../../interfaces";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select
+} from "@mui/material";
 
 interface IAddProjectModalProps {
   isOpened: boolean;
@@ -18,17 +27,17 @@ const AddProjectModal: FC<IAddProjectModalProps> = ({
   isOpened,
   handleModal
 }) => {
-  // const addNewProject = useCreateEmployeeAction();
+  const addNewProject = useCreateProjectAction();
   const { clients } = useClientState();
-  const fetchClients = useFetchClientsAction();
-  const [newProjectData, setNewProjectData] = useState({
+  const fetchProjects = useFetchProjectsAction();
+  const [newProjectData, setNewProjectData] = useState<ProjectCreateRequest>({
     name: '',
-    budget: '',
+    budget: 0,
     client: ''
   });
 
   useEffect(() => {
-    fetchClients();
+    fetchProjects();
   }, []);
 
   const handleClose = () => {
@@ -36,7 +45,7 @@ const AddProjectModal: FC<IAddProjectModalProps> = ({
   };
 
   const handleSave = async () => {
-    // await addNewEmployee(newEmployeeData);
+    await addNewProject(newProjectData);
     handleClose();
   };
 
