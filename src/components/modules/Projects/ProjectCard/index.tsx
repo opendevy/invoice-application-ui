@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { ProjectModel } from "../../../../resources/models";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 interface IProjectCard {
   projectData: ProjectModel;

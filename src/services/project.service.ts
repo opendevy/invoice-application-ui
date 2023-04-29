@@ -16,17 +16,26 @@ export async function createProject(data: ProjectCreateRequest) {
     });
 }
 
-export async function fetchProjects(id?: string) {
+export async function fetchProjects() {
   return apiClient
-    .get('/projects', {
-      params: { id }
-    })
+    .get('/projects')
     .then((response) => {
       if (response) {
         return response.data;
       }
       return Promise.reject();
     });
+}
+
+export async function fetchProject(id: string) {
+  return apiClient
+    .get(`/projects/${id}`)
+    .then((response) => {
+      if (response) {
+        return response.data;
+      }
+      return Promise.reject();
+    })
 }
 
 export async function updateProject(_id: string, data: ProjectUpdateRequest) {

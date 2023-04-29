@@ -1,21 +1,23 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router";
-import {useFetchProjectsAction, useProjectState} from "../../../hooks/redux";
-import {ProjectModel} from "../../../resources/models";
+import { ProjectModel } from "../../../resources/models";
 import TextField from "@mui/material/TextField";
-import {Button} from "@mui/material";
+import { Button } from "@mui/material";
+import * as ProjectService from "../../../services/project.service";
+import {FaPlus} from "react-icons/fa";
+import AddEmployeeToProjectModal from "../../../components/modules/Projects/AddEmployeeToProjectModal";
 
 const ProjectDetail = () => {
-  const { projects } = useProjectState();
   const { pathname } = useLocation();
   const router = useHistory();
-  const fetchProjects = useFetchProjectsAction();
   const projectId = pathname.split('/')[2];
   const [project, setProject] = useState<ProjectModel | undefined>();
+  const [isAddEmployeeModalOpened, setIsAddEmployeeModalOpened] = useState(false);
 
   useEffect(() => {
-    // fetchProjects(projectId);
-    setProject(projects.find((item) => item._id = projectId));
+    ProjectService.fetchProject(projectId).then((res) => {
+      setProject(res);
+    });
   }, []);
 
   const handleProjectData = (e: any) => {
@@ -25,6 +27,10 @@ const ProjectDetail = () => {
         [e.name]: e.value
       });
     }
+  };
+  
+  const handleAddEmployeeModal = () => {
+    setIsAddEmployeeModalOpened(!isAddEmployeeModalOpened);
   };
 
   const handleProjectUpdate = () => {
@@ -66,6 +72,15 @@ const ProjectDetail = () => {
               <h4 className="text-xl font-bold">
                 Employees
               </h4>
+              <div className="my-4">
+                <Button
+                  onClick={handleAddEmployeeModal}
+                  variant="contained"
+                  startIcon={<FaPlus />}
+                >
+                  Add Employee
+                </Button>
+              </div>
             </div>
             <div className="flex justify-around">
               <Button
@@ -83,6 +98,10 @@ const ProjectDetail = () => {
             </div>
         </div>
       }
+      <AddEmployeeToProjectModal
+        isOpened={isAddEmployeeModalOpened}
+        handleModal={handleAddEmployeeModal}
+      />
     </div>
   );
 };
