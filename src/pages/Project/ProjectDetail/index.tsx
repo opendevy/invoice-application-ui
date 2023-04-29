@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import * as ProjectService from "../../../services/project.service";
 import {FaPlus} from "react-icons/fa";
-import AddEmployeeToProjectModal from "../../../components/modules/Projects/AddEmployeeToProjectModal";
+import AddEmployeeToProjectModal from "../../../components/modules/Manager/Projects/AddEmployeeToProjectModal";
 
 const ProjectDetail = () => {
   const { pathname } = useLocation();

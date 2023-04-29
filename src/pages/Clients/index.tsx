@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@mui/material";
-import AddClientModal from "../../components/modules/Clients/AddClientModal";
+import AddClientModal from "../../components/modules/Manager/Clients/AddClientModal";
 import { useClientState, useFetchClientsAction } from "../../hooks/redux";
-import ClientItem from "../../components/modules/Clients/ClientItem";
+import ClientItem from "../../components/modules/Manager/Clients/ClientItem";
 
 const Clients = () => {
   const { clients } = useClientState();

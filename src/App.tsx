@@ -16,6 +16,9 @@ import Accountant from "./pages/Accountant";
 import ProjectPage from "./pages/Project";
 import ProjectDetail from "./pages/Project/ProjectDetail";
 import EmployeeDetail from "./pages/Employees/EmployeeDetail";
+import EmployeeLayout from "./components/layout/EmployeeLayout";
+import EmployeeProjects from "./pages/Employee/Projects";
+import EmployeeProjectDetail from "./pages/Employee/Detail";
 
 const theme = createTheme({});
 
@@ -39,12 +42,22 @@ const App = memo(() => {
                 </Switch>
               </FullLayout>
             ) : (
-              <FullLayout>
-                <Switch>
-                  <Route exact path={ROUTES.ACCOUNTANT} component={Accountant} />
-                  <Redirect to={ROUTES.ACCOUNTANT} />
-                </Switch>
-              </FullLayout>
+              account.permission === 'accountant' ? (
+                <FullLayout>
+                  <Switch>
+                    <Route exact path={ROUTES.ACCOUNTANT} component={Accountant} />
+                    <Redirect to={ROUTES.ACCOUNTANT} />
+                  </Switch>
+                </FullLayout>
+              ) : (
+                <EmployeeLayout>
+                  <Switch>
+                    <Route exact path={ROUTES.EMPLOYEE_PROJECT} component={EmployeeProjects} />
+                    <Route exact path={ROUTES.EMPLOYEE_PROJECT_DETAIL} component={EmployeeProjectDetail} />
+                    <Redirect to={ROUTES.EMPLOYEE_PROJECT} />
+                  </Switch>
+                </EmployeeLayout>
+              )
             )
           ) : (
             <AuthLayout>

@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {Button} from "@mui/material";
-import AddProjectModal from "../../components/modules/Projects/AddProjectModal";
+import AddProjectModal from "../../components/modules/Manager/Projects/AddProjectModal";
 import {useProjectState, useFetchProjectsAction} from "../../hooks/redux";
-import ProjectCard from "../../components/modules/Projects/ProjectCard";
+import ProjectCard from "../../components/modules/Manager/Projects/ProjectCard";
 
 const ProjectPage = () => {
   const { projects } = useProjectState();

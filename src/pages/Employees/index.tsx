@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {Button} from "@mui/material";
-import AddEmployeeModal from "../../components/modules/Employees/AddEmployeeModal";
+import AddEmployeeModal from "../../components/modules/Manager/Employees/AddEmployeeModal";
 import {useEmployeeState, useFetchEmployeesAction} from "../../hooks/redux";
-import EmployeeItem from "../../components/modules/Employees/EmployeeItem";
+import EmployeeItem from "../../components/modules/Manager/Employees/EmployeeItem";
 
 const Employees = () => {
   const { employees } = useEmployeeState();

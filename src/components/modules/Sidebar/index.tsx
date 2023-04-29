@@ -15,8 +15,6 @@ const Sidebar = () => {
           return setSidebarItems(managerSidebarItems);
         case 'accountant':
           return setSidebarItems(accountantSidebarItems);
-        case 'employee':
-          return setSidebarItems(employeeSidebarItems);
       }
     }
   }, [account]);
