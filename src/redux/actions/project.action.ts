@@ -38,9 +38,9 @@ export const updateProject = (_id: string, data: ProjectUpdateRequest) => async 
   }
 }
 
-export const fetchProjects = () => async (dispatch: Dispatch) => {
+export const fetchProjects = (id?: string) => async (dispatch: Dispatch) => {
   try {
-    const res = await ProjectService.fetchProjects();
+    const res = await ProjectService.fetchProjects(id);
     dispatch(setProjects(res));
     return res;
   } catch (err) {

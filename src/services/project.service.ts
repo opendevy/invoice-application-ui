@@ -16,9 +16,11 @@ export async function createProject(data: ProjectCreateRequest) {
     });
 }
 
-export async function fetchProjects() {
+export async function fetchProjects(id?: string) {
   return apiClient
-    .get('/projects')
+    .get('/projects', {
+      params: { id }
+    })
     .then((response) => {
       if (response) {
         return response.data;

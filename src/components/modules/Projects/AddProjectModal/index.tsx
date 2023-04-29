@@ -107,7 +107,7 @@ const AddProjectModal: FC<IAddProjectModalProps> = ({
             >
               {
                 clients.map((item) => (
-                  <MenuItem value={item.name}>
+                  <MenuItem value={item._id} key={item._id}>
                     {item.name}
                   </MenuItem>
                 ))

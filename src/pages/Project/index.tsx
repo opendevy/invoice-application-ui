@@ -1,14 +1,21 @@
 import React, {useEffect, useState} from "react";
 import {Button} from "@mui/material";
 import AddProjectModal from "../../components/modules/Projects/AddProjectModal";
-import {useClientState, useFetchClientsAction} from "../../hooks/redux";
+import {useProjectState, useFetchProjectsAction} from "../../hooks/redux";
+import ProjectCard from "../../components/modules/Projects/ProjectCard";
 
 const ProjectPage = () => {
+  const { projects } = useProjectState();
+  const fetchProjects = useFetchProjectsAction();
   const [isAddModalOpened, setIsAddModalOpened] = useState(false);
 
   const handleAddModal = () => {
     setIsAddModalOpened(!isAddModalOpened);
   };
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
 
   return (
     <div>
@@ -22,6 +29,16 @@ const ProjectPage = () => {
         >
           + Add New Project
         </Button>
+      </div>
+      <div className="grid grid-cols-4 gap-4 mt-8">
+        {
+          projects.map((project) => (
+            <ProjectCard
+              key={project._id}
+              projectData={project}
+            />
+          ))
+        }
       </div>
       <AddProjectModal
         isOpened={isAddModalOpened}

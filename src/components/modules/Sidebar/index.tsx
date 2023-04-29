@@ -32,7 +32,7 @@ const Sidebar = () => {
             <Link
               key={item.url}
               to={item.url}
-              className={`px-3 py-1 hover:bg-primary text-lg ${pathname === item.url && 'bg-primary'}`}
+              className={`px-3 py-1 hover:bg-primary text-lg ${pathname.includes(item.url) && 'bg-primary'}`}
             >
               {item.title}
             </Link>

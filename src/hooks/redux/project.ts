@@ -25,5 +25,5 @@ export const useUpdateProjectAction = () => {
 
 export const useFetchProjectsAction = () => {
   const dispatch = useDispatch();
-  return () => dispatch(fetchProjects());
+  return (id?: string) => dispatch(fetchProjects(id));
 }

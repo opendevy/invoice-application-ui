@@ -7,7 +7,6 @@ const AuthProvider: FC = ({ children }) => {
   const getAccount = useGetAccountAction();
 
   useEffect(() => {
-
     setTokens({
       accessToken: localStorage.getItem('access_token'),
       refreshToken: localStorage.getItem('refresh_token')
