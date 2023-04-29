@@ -16,17 +16,7 @@ import {
   DialogTitle
 } from "@mui/material";
 import {useEmployeeState, useFetchEmployeesAction} from "../../../../hooks/redux";
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
+import TextField from "@mui/material/TextField";
 
 interface IAddEmployeeToProjectModalProps {
   isOpened: boolean;
@@ -37,28 +27,14 @@ const AddEmployeeToProjectModal: FC<IAddEmployeeToProjectModalProps> = ({
   isOpened,
   handleModal
 }) => {
+  const [employee, setEmployee] = useState('');
+  const [rate, setRate] = useState('');
   const { employees } = useEmployeeState();
   const fetchEmployees = useFetchEmployeesAction();
-  const [employeesName, setEmployeesName] = useState<string[]>([]);
-  const [selectedEmployees, setSelectedEmployees] = useState<string[]>([]);
   
   useEffect(() => {
     fetchEmployees();
   }, []);
-  
-  useEffect(() => {
-    // setSelectedEmployees();
-  }, [employeesName]);
-  
-  const handleChange = (event: SelectChangeEvent<typeof employeesName>) => {
-    const {
-      target: { value },
-    } = event;
-    setEmployeesName(
-      // On autofill we get a the stringified value.
-      typeof value === 'string' ? value.split(',') : value,
-    );
-  };
   
   const handleClose = () => {
     handleModal();
@@ -66,6 +42,10 @@ const AddEmployeeToProjectModal: FC<IAddEmployeeToProjectModalProps> = ({
   
   const handleSave = async () => {
     handleClose();
+  };
+  
+  const handleChange = (event: SelectChangeEvent) => {
+    setEmployee(event.target.value as string);
   };
   
   return (
@@ -78,7 +58,8 @@ const AddEmployeeToProjectModal: FC<IAddEmployeeToProjectModalProps> = ({
         <DialogTitle
           sx={{
             fontWeight: 'bold',
-            textAlign: 'center'
+            textAlign: 'center',
+            marginTop: 1
           }}
         >
           Add Employee To Project
@@ -88,34 +69,34 @@ const AddEmployeeToProjectModal: FC<IAddEmployeeToProjectModalProps> = ({
             width: 400
           }}
         >
-          <FormControl sx={{ my: 1 }} fullWidth>
-            <InputLabel id="demo-multiple-chip-label">Employees</InputLabel>
+          <FormControl fullWidth sx={{ marginTop: 2 }}>
+            <InputLabel id="demo-simple-select-label">Employee</InputLabel>
             <Select
-              labelId="demo-multiple-chip-label"
-              id="demo-multiple-chip"
-              multiple
-              value={employeesName}
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={employee}
+              label="Employee"
               onChange={handleChange}
-              input={<OutlinedInput id="select-multiple-chip" label="Employees" />}
-              renderValue={(selected) => (
-                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                  {selected.map((value) => (
-                    <Chip key={value} label={value} />
-                  ))}
-                </Box>
-              )}
-              MenuProps={MenuProps}
             >
-              {employees.map((employee) => (
-                <MenuItem
-                  key={employee._id}
-                  value={employee.name}
-                >
-                  {employee.name}
-                </MenuItem>
-              ))}
+              {
+                employees.map((employee) => (
+                  <MenuItem value={employee._id}>
+                    {employee.name}
+                  </MenuItem>
+                ))
+              }
             </Select>
           </FormControl>
+          <TextField
+            autoFocus
+            name="rate"
+            label="Hourly Rate"
+            type="number"
+            fullWidth
+            variant="standard"
+            value={rate}
+            onChange={(e) => setRate(e.target.value)}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleSave}>

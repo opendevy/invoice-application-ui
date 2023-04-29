@@ -27,6 +27,17 @@ export async function fetchEmployees() {
     });
 }
 
+export async function fetchEmployee(id: string) {
+  return apiClient
+    .get(`/employees/${id}`)
+    .then((response) => {
+      if (response) {
+        return response.data;
+      }
+      return Promise.reject();
+    })
+}
+
 export async function updateEmployee(_id: string, data: EmployeeUpdateRequest) {
   return apiClient
     .patch(`/employees/${_id}`, data)
