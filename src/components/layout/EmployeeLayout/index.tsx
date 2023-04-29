@@ -1,4 +1,5 @@
 import React, { FC, ReactNode } from "react";
+import EmployeeHeader from "../../modules/EmployeeHeader";
 
 interface IEmployeeLayoutProps {
   children: ReactNode;
@@ -6,8 +7,9 @@ interface IEmployeeLayoutProps {
 
 const EmployeeLayout: FC<IEmployeeLayoutProps> = ({ children }) => {
   return (
-    <div className="flex h-screen">
-      <div className="container mx-auto mt-6">
+    <div className="flex flex-col h-screen">
+      <EmployeeHeader />
+      <div className="flex-grow container mx-auto mt-6">
         {children}
       </div>
     </div>

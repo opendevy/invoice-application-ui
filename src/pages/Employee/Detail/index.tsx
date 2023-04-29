@@ -1,12 +1,15 @@
-import React, {useEffect, useState} from "react";
-import {useLocation} from "react-router-dom";
-import {ProjectModel} from "../../../resources/models";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { ProjectModel } from "../../../resources/models";
 import * as ProjectService from "../../../services/project.service";
-import {Button} from "@mui/material";
+import { Button } from "@mui/material";
 import ReservationModal from "../../../components/modules/Employee/ReservationModal";
+import { FaTimes } from "react-icons/fa";
+import { useHistory } from "react-router";
 
 const EmployeeProjectDetail = () => {
   const { pathname } = useLocation();
+  const router = useHistory();
   const projectId = pathname.split('/')[3];
   const [project, setProject] = useState<ProjectModel | undefined>();
   const [isReservationModalOpened, setIsReservationModalOpened] = useState(false);
@@ -19,13 +22,23 @@ const EmployeeProjectDetail = () => {
   
   const handleReservationModal = () => {
     setIsReservationModalOpened(!isReservationModalOpened);
-  }
+  };
+  
+  const goBack = () => {
+    router.push('/employee/projects')
+  };
   
   return (
     <div>
-      <h2 className="font-bold text-4xl">
-        Project Detail
-      </h2>
+      <div className="flex justify-between items-center">
+        <h2 className="font-bold text-4xl">
+          Project Detail
+        </h2>
+        <FaTimes
+          className="text-xl cursor-pointer"
+          onClick={goBack}
+        />
+      </div>
       {
         project &&
         <div className="space-y-6 my-4">
