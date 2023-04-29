@@ -9,6 +9,8 @@ import { useAuthState } from "./hooks/redux";
 import FullLayout from "./components/layout/FullLayout";
 import AuthLayout from "./components/layout/AuthLayout";
 import Dashboard from "./pages/Dashboard";
+import Clients from "./pages/Clients";
+import Employees from "./pages/Employees";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
 import ResetPassword from "./pages/Auth/ResetPassword";
 
@@ -25,6 +27,8 @@ const App = memo(() => {
             <FullLayout>
               <Switch>
                 <Route exact path={ROUTES.DASHBOARD} component={Dashboard} />
+                <Route exact path={ROUTES.CLIENT} component={Clients} />
+                <Route exact path={ROUTES.EMPLOYEE} component={Employees} />
                 <Redirect to={ROUTES.DASHBOARD} />
               </Switch>
             </FullLayout>
