@@ -16,7 +16,7 @@ const clientReducer = (state: ClientState = initialState, action: any) => {
     case CLIENT_ACTIONS.SET_CLIENTS:
       return {
         ...state,
-        clients: payload.tokens,
+        clients: payload.clients
       };
 
     default:

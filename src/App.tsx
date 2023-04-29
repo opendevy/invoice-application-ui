@@ -8,11 +8,11 @@ import AuthProvider from "./providers/AuthProvider";
 import { useAuthState } from "./hooks/redux";
 import FullLayout from "./components/layout/FullLayout";
 import AuthLayout from "./components/layout/AuthLayout";
-import Dashboard from "./pages/Dashboard";
 import Clients from "./pages/Clients";
 import Employees from "./pages/Employees";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
 import ResetPassword from "./pages/Auth/ResetPassword";
+import Accountant from "./pages/Accountant";
 
 const theme = createTheme({});
 
@@ -24,14 +24,22 @@ const App = memo(() => {
       <AuthProvider>
         {
           account ? (
-            <FullLayout>
-              <Switch>
-                <Route exact path={ROUTES.DASHBOARD} component={Dashboard} />
-                <Route exact path={ROUTES.CLIENT} component={Clients} />
-                <Route exact path={ROUTES.EMPLOYEE} component={Employees} />
-                <Redirect to={ROUTES.DASHBOARD} />
-              </Switch>
-            </FullLayout>
+            account.permission === 'manager' ? (
+              <FullLayout>
+                <Switch>
+                  <Route exact path={ROUTES.CLIENT} component={Clients} />
+                  <Route exact path={ROUTES.EMPLOYEE} component={Employees} />
+                  <Redirect to={ROUTES.CLIENT} />
+                </Switch>
+              </FullLayout>
+            ) : (
+              <FullLayout>
+                <Switch>
+                  <Route exact path={ROUTES.ACCOUNTANT} component={Accountant} />
+                  <Redirect to={ROUTES.ACCOUNTANT} />
+                </Switch>
+              </FullLayout>
+            )
           ) : (
             <AuthLayout>
               <Switch>

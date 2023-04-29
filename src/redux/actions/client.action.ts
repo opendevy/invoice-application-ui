@@ -1,13 +1,17 @@
-import {Dispatch} from 'redux';
-import {CLIENT_ACTIONS} from '../types';
+import { Dispatch } from 'redux';
+import { CLIENT_ACTIONS } from '../types';
 import * as ClientService from '../../services/client.service';
-// import {Tokens} from '../reducers/auth.reducer';
-import {ClientModel} from '../../resources/models';
+import { ClientModel } from '../../resources/models';
 import {
   ClientCreateRequest,
   ClientUpdateRequest,
   ClientDeleteRequest
 } from "../../interfaces";
+
+export const addClient = (client: ClientModel) => ({
+  type: CLIENT_ACTIONS.ADD_CLIENT,
+  payload: { client },
+});
 
 export const setClients = (clients: ClientModel[]) => ({
   type: CLIENT_ACTIONS.SET_CLIENTS,
@@ -16,9 +20,10 @@ export const setClients = (clients: ClientModel[]) => ({
 
 export const createClient = (data: ClientCreateRequest) => async (dispatch: Dispatch) => {
   try {
-    const res = await ClientService.createClient(data);
-    dispatch(setClients(res));
-    return res;
+    await ClientService.createClient(data);
+    const fetchRes = await ClientService.fetchClients();
+    dispatch(setClients(fetchRes));
+    return fetchRes;
   } catch (err) {
     console.log('err', { ...err });
   }
@@ -26,7 +31,9 @@ export const createClient = (data: ClientCreateRequest) => async (dispatch: Disp
 
 export const updateClient = (_id: string, data: ClientUpdateRequest) => async (dispatch: Dispatch) => {
   try {
-    return await ClientService.updateClient(_id, data);
+    await ClientService.updateClient(_id, data);
+    const fetchRes = await ClientService.fetchClients();
+    dispatch(setClients(fetchRes));
   } catch (err) {
     console.log('err', { ...err });
   }

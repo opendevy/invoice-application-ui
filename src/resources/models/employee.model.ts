@@ -1,4 +1,4 @@
-export class ClientModel {
+export class EmployeeModel {
   name: string;
   createdAt: string;
   updatedAt: string;

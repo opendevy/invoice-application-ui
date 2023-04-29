@@ -12,7 +12,7 @@ const FullLayout: FC<IFullLayoutProps> = ({ children }) => {
       <Sidebar />
       <div className="flex-grow flex flex-col">
         <Header />
-        <div className="p-3 flex-grow">
+        <div className="p-3 flex-grow overflow-y-auto">
           {children}
         </div>
       </div>

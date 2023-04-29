@@ -6,6 +6,6 @@ export const ROUTES = {
     RESET_PASSWORD: "/reset-password",
   },
   CLIENT: "/clients",
-  DASHBOARD: "/dashboard",
+  ACCOUNTANT: "/accountant",
   EMPLOYEE: "/employees"
 };
