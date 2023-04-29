@@ -49,6 +49,9 @@ const ProjectDetail = () => {
       {
         project &&
           <div className="space-y-6 my-4">
+            <h2 className="font-bold text-xl">
+              Client: {project.client.name}
+            </h2>
             <TextField
               autoFocus
               name="budget"

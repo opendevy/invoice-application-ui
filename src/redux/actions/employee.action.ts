@@ -41,7 +41,9 @@ export const updateEmployee = (_id: string, data: EmployeeUpdateRequest) => asyn
 
 export const deleteEmployee = (_id: string) => async (dispatch: Dispatch) => {
   try {
-    return await EmployeeService.deleteEmployee(_id);
+    await EmployeeService.deleteEmployee(_id);
+    const fetchRes = await EmployeeService.fetchEmployees();
+    dispatch(setEmployees(fetchRes));
   } catch (err) {
     console.log('err', { ...err });
   }
