@@ -1,24 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router";
-import { ProjectModel } from "../../../resources/models";
+import {ProjectModel, ReservationModel} from "../../../resources/models";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import * as ProjectService from "../../../services/project.service";
 import { FaPlus } from "react-icons/fa";
 import AddEmployeeToProjectModal from "../../../components/modules/Manager/Projects/AddEmployeeToProjectModal";
+import ReservedEmployeeItem from "../../../components/modules/Manager/Projects/ReservedEmployeeItem";
+
+type ProjectDetail = {
+  projectData: ProjectModel | undefined;
+  reservations: ReservationModel[] | undefined;
+}
 
 const ProjectDetail = () => {
   const { pathname } = useLocation();
   const router = useHistory();
   const projectId = pathname.split('/')[2];
-  const [project, setProject] = useState<ProjectModel | undefined>();
-  const [isAddEmployeeModalOpened, setIsAddEmployeeModalOpened] = useState(false);
+  const [project, setProject] = useState<ProjectDetail>();
 
   useEffect(() => {
+    fetchProject();
+  }, []);
+  
+  const fetchProject = () => {
     ProjectService.fetchProject(projectId).then((res) => {
       setProject(res);
     });
-  }, []);
+  };
 
   const handleProjectData = (e: any) => {
     if (project) {
@@ -29,9 +38,9 @@ const ProjectDetail = () => {
     }
   };
   
-  const handleAddEmployeeModal = () => {
-    setIsAddEmployeeModalOpened(!isAddEmployeeModalOpened);
-  };
+  // const handleAddEmployeeModal = () => {
+  //   setIsAddEmployeeModalOpened(!isAddEmployeeModalOpened);
+  // };
 
   const handleProjectUpdate = () => {
 
@@ -50,7 +59,7 @@ const ProjectDetail = () => {
         project &&
           <div className="space-y-6 my-4">
             <h2 className="font-bold text-xl">
-              Client: {project.client.name}
+              Client: {project.projectData?.client.name}
             </h2>
             <TextField
               autoFocus
@@ -59,7 +68,7 @@ const ProjectDetail = () => {
               type="number"
               fullWidth
               variant="standard"
-              value={project?.budget}
+              value={project?.projectData?.budget}
               onChange={(e) => handleProjectData(e.target)}
             />
             <TextField
@@ -68,21 +77,43 @@ const ProjectDetail = () => {
               label="Project Name"
               fullWidth
               variant="standard"
-              value={project?.name}
+              value={project?.projectData?.name}
               onChange={(e) => handleProjectData(e.target)}
             />
             <div>
               <h4 className="text-xl font-bold">
-                Employees
+                Reserved Employees
               </h4>
               <div className="my-4">
-                <Button
-                  onClick={handleAddEmployeeModal}
-                  variant="contained"
-                  startIcon={<FaPlus />}
-                >
-                  Add Employee
-                </Button>
+                <table className="w-full">
+                  <thead>
+                    <tr>
+                      <td>
+                        Name
+                      </td>
+                      <td>
+                        Rate
+                      </td>
+                      <td>
+                        Status
+                      </td>
+                      <td>
+                        Approve/Disapprove
+                      </td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      project.projectData?.employees.map((employee) => (
+                        <ReservedEmployeeItem
+                          key={employee._id}
+                          employee={employee}
+                          reservations={project?.reservations}
+                        />
+                      ))
+                    }
+                  </tbody>
+                </table>
               </div>
             </div>
             <div className="flex justify-around">
@@ -101,10 +132,10 @@ const ProjectDetail = () => {
             </div>
         </div>
       }
-      <AddEmployeeToProjectModal
-        isOpened={isAddEmployeeModalOpened}
-        handleModal={handleAddEmployeeModal}
-      />
+      {/*<AddEmployeeToProjectModal*/}
+      {/*  isOpened={isAddEmployeeModalOpened}*/}
+      {/*  handleModal={handleAddEmployeeModal}*/}
+      {/*/>*/}
     </div>
   );
 };

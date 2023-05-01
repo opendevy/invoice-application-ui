@@ -1,8 +1,10 @@
 import {ClientModel} from "./client.model";
+import {UserModel} from "./user.model";
 
 export class ProjectModel {
   name: string;
   client: ClientModel;
+  employees: UserModel[];
   budget: number;
   createdAt: string;
   updatedAt: string;
@@ -13,6 +15,7 @@ export class ProjectModel {
     const data = {
       name: '',
       client: '',
+      employees: '',
       budget: '',
       createdAt: '',
       updatedAt: '',
@@ -27,6 +30,7 @@ export class ProjectModel {
     this.__v = data.__v;
     this._id = data._id;
     this.client = data.client;
+    this.employees = data.employees;
     this.budget = data.budget;
   }
 }

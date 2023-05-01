@@ -10,3 +10,7 @@ export async function createReservation(project_id: string, hourlyRate: number) 
       return Promise.reject();
     });
 }
+
+export async function manageReservation(reservation_id: string) {
+
+}
