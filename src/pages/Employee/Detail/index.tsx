@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import {ProjectModel, ReservationModel} from "../../../resources/models";
 import * as ProjectService from "../../../services/project.service";
+import * as WorkService from "../../../services/work.service";
 import { Button } from "@mui/material";
 import ReservationModal from "../../../components/modules/Employee/ReservationModal";
 import { FaTimes } from "react-icons/fa";
@@ -14,11 +15,17 @@ type ProjectDetail = {
 }
 
 const EmployeeProjectDetail = () => {
+  const [isStarted, setIsStarted] = useState(false);
   const { pathname } = useLocation();
   const router = useHistory();
   const projectId = pathname.split('/')[3];
   const [project, setProject] = useState<ProjectDetail>();
+  const [workHistory, setWorkHistory] = useState<any>();
   const [isReservationModalOpened, setIsReservationModalOpened] = useState(false);
+  
+  const handleStartStatus = () => {
+    setIsStarted(!isStarted);
+  };
   
   useEffect(() => {
     fetchProject();
@@ -27,7 +34,7 @@ const EmployeeProjectDetail = () => {
   const fetchProject = () => {
     ProjectService.fetchProject(projectId).then((res) => {
       setProject(res);
-    })
+    });
   };
   
   const handleReservationModal = () => {
@@ -42,8 +49,19 @@ const EmployeeProjectDetail = () => {
     if (project?.reservation?.status !== 'approved') {
       toast.warning('This reservation is not approved yet');
     } else {
-    
+      WorkService.startWork(projectId).then((res) => {
+        setWorkHistory(res);
+        toast.success('You started working on this project');
+        handleStartStatus();
+      })
     }
+  };
+  
+  const handleEndWork = () => {
+    WorkService.endWork(workHistory?._id).then((res) => {
+      handleStartStatus();
+      toast.warning('You finished working on this project');
+    })
   };
   
   return (
@@ -76,13 +94,25 @@ const EmployeeProjectDetail = () => {
                     Status: {project.reservation.status}
                   </div>
                   <div className="flex justify-center">
-                    <Button
-                      variant="outlined"
-                      color="info"
-                      onClick={handleStartWork}
-                    >
-                      Start Work
-                    </Button>
+                    {
+                      isStarted ? (
+                        <Button
+                          variant="outlined"
+                          color="secondary"
+                          onClick={handleEndWork}
+                        >
+                          End Work
+                        </Button>
+                      ) : (
+                        <Button
+                          variant="outlined"
+                          color="info"
+                          onClick={handleStartWork}
+                        >
+                          Start Work
+                        </Button>
+                      )
+                    }
                   </div>
                 </>
               ) : (

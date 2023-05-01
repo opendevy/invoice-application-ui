@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router";
-import {ProjectModel, ReservationModel} from "../../../resources/models";
+import { ProjectModel, ReservationModel } from "../../../resources/models";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import * as ProjectService from "../../../services/project.service";
-import { FaPlus } from "react-icons/fa";
-import AddEmployeeToProjectModal from "../../../components/modules/Manager/Projects/AddEmployeeToProjectModal";
 import ReservedEmployeeItem from "../../../components/modules/Manager/Projects/ReservedEmployeeItem";
 
 type ProjectDetail = {
@@ -37,10 +35,6 @@ const ProjectDetail = () => {
       });
     }
   };
-  
-  // const handleAddEmployeeModal = () => {
-  //   setIsAddEmployeeModalOpened(!isAddEmployeeModalOpened);
-  // };
 
   const handleProjectUpdate = () => {
 
@@ -60,6 +54,9 @@ const ProjectDetail = () => {
           <div className="space-y-6 my-4">
             <h2 className="font-bold text-xl">
               Client: {project.projectData?.client.name}
+            </h2>
+            <h2 className="font-bold text-xl">
+              Project Name: {project.projectData?.name}
             </h2>
             <TextField
               autoFocus
@@ -98,7 +95,7 @@ const ProjectDetail = () => {
                         Status
                       </td>
                       <td>
-                        Approve/Disapprove
+                        Disapprove / Approve
                       </td>
                     </tr>
                   </thead>
@@ -109,6 +106,7 @@ const ProjectDetail = () => {
                           key={employee._id}
                           employee={employee}
                           reservations={project?.reservations}
+                          fetchProject={fetchProject}
                         />
                       ))
                     }
@@ -132,10 +130,6 @@ const ProjectDetail = () => {
             </div>
         </div>
       }
-      {/*<AddEmployeeToProjectModal*/}
-      {/*  isOpened={isAddEmployeeModalOpened}*/}
-      {/*  handleModal={handleAddEmployeeModal}*/}
-      {/*/>*/}
     </div>
   );
 };

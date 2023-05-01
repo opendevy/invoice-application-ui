@@ -1,21 +1,30 @@
 import React, {FC, useState} from "react";
 import {ReservationModel, UserModel} from "../../../../../resources/models";
 import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import * as ReservationService from '../../../../../services/reservation.service';
+import {toast} from "react-toastify";
 
 interface IReservedEmployeeItem {
   employee: UserModel;
   reservations: ReservationModel[] | undefined;
+  fetchProject: () => void;
 }
 
 const ReservedEmployeeItem: FC<IReservedEmployeeItem> = ({
   employee,
-  reservations
+  reservations,
+  fetchProject
 }) => {
   const ownReservation = reservations?.find((reservation) => reservation.employee._id === employee._id)
   
   const handleChange = () => {
-  
+    if (ownReservation) {
+      const status = ownReservation.status === 'approved' ? 'disapproved' : 'approved';
+      ReservationService.manageReservation(ownReservation._id, status).then(() => {
+        toast.success('Changed!')
+        fetchProject();
+      });
+    }
   };
   
   return (
