@@ -34,3 +34,25 @@ export async function fetchWorkHistories(query: any) {
       return Promise.reject();
     })
 }
+
+export async function fetchProjectWorkHistory(user_id: string, project_id: string) {
+  return apiClient
+    .get(`/work-histories/${user_id}/${project_id}`)
+    .then((response) => {
+      if (response) {
+        return response.data;
+      }
+      return Promise.reject();
+    })
+}
+
+export async function fetchOwnProjectWorkHistory(project_id: string) {
+  return apiClient
+    .get(`/work-histories/own/${project_id}`)
+    .then((response) => {
+      if (response) {
+        return response.data;
+      }
+      return Promise.reject();
+    })
+}

@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import { useEmployeeState, useFetchEmployeesAction } from "../../../../hooks/redux";
 import { ProjectModel } from "../../../../resources/models";
-import * as ProjectService from '../../../../services/project.service';
 import { useAccount } from "../../../../context/account.context";
 import DetailLogModal from "./DetailLogModal";
 
@@ -127,6 +126,7 @@ const DetailHistories = () => {
             isOpened={isDetailModalOpened}
             handleModal={handleDetailModalOpen}
             reservedProject={reservedProject}
+            employee={employee}
           />
         )
       }

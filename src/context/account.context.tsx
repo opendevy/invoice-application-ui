@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import * as ReservationService from "../services/reservation.service";
 import * as ProjectService from "../services/project.service";
-import {ProjectModel} from "../resources/models";
+import * as WorkHistoryService from "../services/work.service";
+import { ProjectModel } from "../resources/models";
 
 const AccountContext = React.createContext({} as any);
 
@@ -17,13 +18,23 @@ function AccountProvider(props: any) {
       setReservedProjects(res);
     })
   }
+  
+  async function fetchProjectWorkHistory(user_id: string, project_id: string) {
+    return await WorkHistoryService.fetchProjectWorkHistory(user_id, project_id).then((res) => res)
+  }
+  
+  async function fetchOwnProjectWorkHistory(project_id: string) {
+    return await WorkHistoryService.fetchOwnProjectWorkHistory(project_id).then((res) => res)
+  }
 
   return (
     <AccountContext.Provider
       value={{
         createReservation,
         fetchReservedProjects,
-        reservedProjects
+        reservedProjects,
+        fetchProjectWorkHistory,
+        fetchOwnProjectWorkHistory
       }}
       {...props}
     />

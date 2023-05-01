@@ -8,6 +8,7 @@ import ReservationModal from "../../../components/modules/Employee/ReservationMo
 import { FaTimes } from "react-icons/fa";
 import { useHistory } from "react-router";
 import {toast} from "react-toastify";
+import {useAccount} from "../../../context/account.context";
 
 type ProjectDetail = {
   projectData: ProjectModel | undefined;
@@ -22,6 +23,8 @@ const EmployeeProjectDetail = () => {
   const [project, setProject] = useState<ProjectDetail>();
   const [workHistory, setWorkHistory] = useState<any>();
   const [isReservationModalOpened, setIsReservationModalOpened] = useState(false);
+  const { fetchOwnProjectWorkHistory } = useAccount();
+  const [log, setLog] = useState<any>();
   
   const handleStartStatus = () => {
     setIsStarted(!isStarted);
@@ -34,6 +37,9 @@ const EmployeeProjectDetail = () => {
   const fetchProject = () => {
     ProjectService.fetchProject(projectId).then((res) => {
       setProject(res);
+      fetchOwnProjectWorkHistory(res.projectData._id).then((res: any) => {
+        setLog(res);
+      });
     });
   };
   
@@ -86,6 +92,12 @@ const EmployeeProjectDetail = () => {
             </h2>
             <div>
               Budget: {project.projectData.budget}
+            </div>
+            <div>
+              Total Hours: {log?.totalHours.toFixed(3)} (hrs)
+            </div>
+            <div>
+              Total Price: {log?.totalPrice.toFixed(3)}
             </div>
             {
               project.reservation ? (
