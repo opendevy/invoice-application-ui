@@ -14,7 +14,7 @@ const Header = () => {
           onClick={logout}
         >
           <FaSignOutAlt className='text-white' />
-          <span>
+          <span className="text-xl font-bold">
             {account?.name}
           </span>
         </div>

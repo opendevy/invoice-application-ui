@@ -1,8 +1,15 @@
-import React, { FC, useState } from 'react';
-import { Accordion, AccordionSummary, AccordionDetails, Typography, Button } from '@mui/material';
-import { ClientModel } from '../../../../../resources/models';
+import React, { FC, useState, useEffect } from 'react';
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Typography,
+  Button
+} from '@mui/material';
+import { ClientModel, ProjectModel } from '../../../../../resources/models';
 import { FaChevronDown, FaPen } from 'react-icons/fa';
 import UpdateClientModal from '../UpdateClientModal';
+import * as ProjectService from '../../../../../services/project.service';
 
 interface IClientItemProps {
   clientData: ClientModel;
@@ -10,10 +17,17 @@ interface IClientItemProps {
 
 const ClientItem: FC<IClientItemProps> = ({ clientData }) => {
   const [isEditModalOpened, setIsEditModalOpened] = useState(false);
+  const [projects, setProjects] = useState<ProjectModel[]>([]);
 
   const handleEditClientModal = () => {
     setIsEditModalOpened(!isEditModalOpened);
-  }
+  };
+
+  useEffect(() => {
+    ProjectService.fetchProjects({ client: clientData._id }).then((res) => {
+      setProjects(res);
+    })
+  }, []);
 
   return (
     <div>
@@ -33,9 +47,40 @@ const ClientItem: FC<IClientItemProps> = ({ clientData }) => {
               Edit Client
             </Button>
           </div>
-          <Typography>
+          <Typography align='center' fontWeight='bold'>
             Project Data
           </Typography>
+          <table className="w-full mt-2">
+            <thead>
+              <tr className="border">
+                <th className="p-2">Project Name</th>
+                <th className="p-2">Budget</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                projects.map((project) => (
+                  <tr
+                    key={project._id}
+                    className='border cursor-pointer'
+                  >
+                    <td className='p-2 text-center'>
+                      {project.name}
+                    </td>
+                    <td className='p-2 text-center'>
+                      {project.budget}
+                    </td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+          {
+            projects.length === 0 &&
+            <div className="flex justify-center font-bold py-4">
+              No Data...
+            </div>
+          }
         </AccordionDetails>
       </Accordion>
       <UpdateClientModal

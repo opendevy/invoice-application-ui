@@ -66,6 +66,7 @@ const EmployeeProjectDetail = () => {
   const handleEndWork = () => {
     WorkService.endWork(workHistory?._id).then((res) => {
       handleStartStatus();
+      fetchProject();
       toast.warning('You finished working on this project');
     })
   };
