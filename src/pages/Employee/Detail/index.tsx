@@ -94,10 +94,10 @@ const EmployeeProjectDetail = () => {
               Budget: {project.projectData.budget}
             </div>
             <div>
-              Total Hours: {log?.totalHours.toFixed(3)} (hrs)
+              Total Hours: {log?.totalHours?.toFixed(3)} (hrs)
             </div>
             <div>
-              Total Price: {log?.totalPrice.toFixed(3)}
+              Total Price: {log?.totalPrice?.toFixed(3)}
             </div>
             {
               project.reservation ? (

@@ -48,7 +48,7 @@ export async function fetchProjectWorkHistory(user_id: string, project_id: strin
 
 export async function fetchOwnProjectWorkHistory(project_id: string) {
   return apiClient
-    .get(`/work-histories/own/${project_id}`)
+    .get(`/work-histories/${project_id}`)
     .then((response) => {
       if (response) {
         return response.data;
