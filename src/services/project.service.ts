@@ -1,8 +1,8 @@
-import apiClient from ".";
+import apiClient from '.';
 import {
   ProjectCreateRequest,
   ProjectUpdateRequest
-} from "../interfaces";
+} from '../interfaces';
 
 export async function createProject(data: ProjectCreateRequest) {
   return apiClient

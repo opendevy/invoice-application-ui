@@ -37,33 +37,32 @@ const Login = () => {
       <div className='px-8 py-4'>
         <div className='text-center'>
           <Typography
-            variant="h5"
-            color="primary"
+            variant='h5'
+            color='primary'
             mb={3}
           >
             LOGIN
           </Typography>
           <Typography
-            variant="body1"
+            variant='body1'
             mb={3}
           >
             Welcome back! Please enter your information
           </Typography>
         </div>
-
         <form onSubmit={form.handleSubmit}>
           <TextField
             fullWidth
-            label="Name"
+            label='Name'
             {...form.getFieldProps('name')}
             helperText={ form.errors.name && form.touched.name ? form.errors.name : '' }
             sx={{ mb: 3 }}
           />
           <TextField
             fullWidth
-            label="Password"
-            type="password"
-            placeholder="Enter your password"
+            label='Password'
+            type='password'
+            placeholder='Enter your password'
             {...form.getFieldProps('password')}
             helperText={ form.errors.password && form.touched.password ? form.errors.password : '' }
             sx={{ mb: 3 }}
@@ -83,9 +82,9 @@ const Login = () => {
           </div>
           <div className='flex justify-center py-4'>
             <Button
-              type="submit"
-              variant="contained"
-              color="primary"
+              type='submit'
+              variant='contained'
+              color='primary'
             >
               Login
             </Button>

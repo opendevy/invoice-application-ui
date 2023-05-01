@@ -1,12 +1,8 @@
-import React, {FC, useState} from "react";
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
-import { ClientModel } from "../../../../../resources/models";
-import {FaChevronDown, FaPen} from "react-icons/fa";
-import {Button} from "@mui/material";
-import UpdateClientModal from "../UpdateClientModal";
+import React, { FC, useState } from 'react';
+import { Accordion, AccordionSummary, AccordionDetails, Typography, Button } from '@mui/material';
+import { ClientModel } from '../../../../../resources/models';
+import { FaChevronDown, FaPen } from 'react-icons/fa';
+import UpdateClientModal from '../UpdateClientModal';
 
 interface IClientItemProps {
   clientData: ClientModel;
@@ -28,9 +24,9 @@ const ClientItem: FC<IClientItemProps> = ({ clientData }) => {
           <Typography>{clientData.name}</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <div className="mb-4">
+          <div className='mb-4'>
             <Button
-              variant="contained"
+              variant='contained'
               startIcon={<FaPen />}
               onClick={handleEditClientModal}
             >

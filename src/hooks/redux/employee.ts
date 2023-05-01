@@ -4,11 +4,9 @@ import {
   createEmployee,
   updateEmployee,
   deleteEmployee,
-  fetchEmployees,
-  setEmployees
+  fetchEmployees
 } from '../../redux/actions';
-import { EmployeeModel } from '../../resources/models';
-import { EmployeeCreateRequest, EmployeeUpdateRequest, EmployeeDeleteRequest } from "../../interfaces";
+import { EmployeeCreateRequest, EmployeeUpdateRequest } from '../../interfaces';
 
 export const useEmployeeState = () => useSelector(({
   employeeReducer

@@ -1,4 +1,4 @@
-import apiClient from ".";
+import apiClient from '.';
 
 export async function createReservation(project_id: string, hourlyRate: number) {
   return apiClient

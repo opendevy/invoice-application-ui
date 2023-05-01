@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from "react";
-import * as EmployeeService from "../../../services/employee.service";
-import { EmployeeModel } from "../../../resources/models";
-import { useLocation } from "react-router-dom";
-import { useHistory } from "react-router";
-import TextField from "@mui/material/TextField";
-import { Button, Dialog, DialogActions, DialogTitle, Slide } from "@mui/material";
-import { FaTrash } from "react-icons/fa";
-import { TransitionProps } from "@mui/material/transitions";
-import { useDeleteEmployeeAction, useUpdateEmployeeAction } from "../../../hooks/redux";
+import React, { useEffect, useState } from 'react';
+import * as EmployeeService from '../../../services/employee.service';
+import { EmployeeModel } from '../../../resources/models';
+import { useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogTitle,
+  Slide,
+  TextField
+} from '@mui/material';
+import { FaTrash } from 'react-icons/fa';
+import { TransitionProps } from '@mui/material/transitions';
+import { useDeleteEmployeeAction, useUpdateEmployeeAction } from '../../../hooks/redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -18,7 +24,7 @@ const Transition = React.forwardRef(function Transition(
   },
   ref: React.Ref<unknown>,
 ) {
-  return <Slide direction="up" ref={ref} {...props} />;
+  return <Slide direction='up' ref={ref} {...props} />;
 });
 
 const validationSchema = Yup.object().shape({
@@ -71,46 +77,46 @@ const EmployeeDetail = () => {
   
   return (
     <div>
-      <h2 className="font-bold text-4xl">
+      <h2 className='font-bold text-4xl'>
         Employee Detail
       </h2>
       {
         employee &&
-        <div className="space-y-4">
-            <div className="mt-8">
-                <Button
-                    variant="contained"
-                    color="warning"
-                    startIcon={<FaTrash />}
-                    onClick={handleDeleteModal}
-                >
-                    Delete Employee
-                </Button>
+        <div className='space-y-4'>
+          <div className='mt-8'>
+            <Button
+              variant='contained'
+              color='warning'
+              startIcon={<FaTrash />}
+              onClick={handleDeleteModal}
+            >
+              Delete Employee
+            </Button>
+          </div>
+          <form onSubmit={form.handleSubmit}>
+            <TextField
+              autoFocus
+              label='Employee Name'
+              fullWidth
+              variant='standard'
+              {...form.getFieldProps('name')}
+              helperText={ form.errors.name && form.touched.name ? form.errors.name : '' }
+            />
+            <div className='flex justify-around mt-4'>
+              <Button
+                type='submit'
+                variant='contained'
+              >
+                Update
+              </Button>
+              <Button
+                onClick={goBack}
+                variant='contained'
+              >
+                Go Back
+              </Button>
             </div>
-            <form onSubmit={form.handleSubmit}>
-              <TextField
-                  autoFocus
-                  label="Employee Name"
-                  fullWidth
-                  variant="standard"
-                  {...form.getFieldProps('name')}
-                  helperText={ form.errors.name && form.touched.name ? form.errors.name : '' }
-              />
-              <div className="flex justify-around mt-4">
-                <Button
-                    type="submit"
-                    variant="contained"
-                >
-                  Update
-                </Button>
-                <Button
-                    onClick={goBack}
-                    variant="contained"
-                >
-                  Go Back
-                </Button>
-              </div>
-            </form>
+          </form>
         </div>
       }
       <Dialog
@@ -118,16 +124,19 @@ const EmployeeDetail = () => {
         TransitionComponent={Transition}
         keepMounted
         onClose={handleDeleteModal}
-        aria-describedby="alert-dialog-slide-description"
+        aria-describedby='alert-dialog-slide-description'
       >
         <DialogTitle>
           Are you sure want to delete this employee?
         </DialogTitle>
         <DialogActions>
-          <Button variant="outlined" onClick={handleDeleteModal}>
+          <Button
+            variant='outlined'
+            onClick={handleDeleteModal}
+          >
             Cancel
           </Button>
-          <Button variant="outlined" onClick={deleteEmployee}>
+          <Button variant='outlined' onClick={deleteEmployee}>
             Ok
           </Button>
         </DialogActions>

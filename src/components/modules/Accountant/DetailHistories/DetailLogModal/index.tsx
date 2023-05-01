@@ -1,11 +1,7 @@
-import React, {FC, useEffect, useState} from "react";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import DialogActions from "@mui/material/DialogActions";
-import Button from "@mui/material/Button";
-import { ProjectModel } from "../../../../../resources/models";
-import { useAccount } from "../../../../../context/account.context";
+import React, { FC, useEffect, useState } from 'react';
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
+import { ProjectModel } from '../../../../../resources/models';
+import { useAccount } from '../../../../../context/account.context';
 
 interface IDetailLogModalProps {
   isOpened: boolean;
@@ -38,7 +34,7 @@ const DetailLogModal: FC<IDetailLogModalProps> = ({
       <Dialog
         open={isOpened}
         onClose={handleClose}
-        maxWidth="lg"
+        maxWidth='lg'
       >
         <DialogTitle
           sx={{
@@ -53,7 +49,7 @@ const DetailLogModal: FC<IDetailLogModalProps> = ({
             width: 400,
           }}
         >
-          <div className="space-y-2">
+          <div className='space-y-2'>
             <div>
               <b>Project Name:</b> {reservedProject.name}
             </div>

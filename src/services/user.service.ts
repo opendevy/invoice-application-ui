@@ -1,5 +1,10 @@
-import apiClient from "./index";
-import {ForgotPasswordRequest, LoginRequest, ResetPasswordRequest, UserCreateRequest} from "../interfaces";
+import apiClient from '.';
+import {
+  ForgotPasswordRequest,
+  LoginRequest,
+  ResetPasswordRequest,
+  UserCreateRequest
+} from '../interfaces';
 
 export async function login(data: LoginRequest) {
   return apiClient

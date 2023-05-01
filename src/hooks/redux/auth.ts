@@ -12,7 +12,7 @@ import {
 } from '../../redux/actions';
 import { Tokens } from '../../redux/reducers/auth.reducer';
 import { UserModel } from '../../resources/models';
-import { ForgotPasswordRequest, LoginRequest, ResetPasswordRequest, UserCreateRequest } from "../../interfaces";
+import { ForgotPasswordRequest, LoginRequest, ResetPasswordRequest, UserCreateRequest } from '../../interfaces';
 
 export const useAuthState = () => useSelector(({
   authReducer

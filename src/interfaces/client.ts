@@ -1,5 +1,6 @@
 export interface ClientCreateRequest {
   name: string;
+  email: string;
 }
 
 export interface ClientUpdateRequest {

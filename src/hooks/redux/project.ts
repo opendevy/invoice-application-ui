@@ -3,11 +3,9 @@ import { RootState } from '../../redux/reducers';
 import {
   createProject,
   updateProject,
-  fetchProjects,
-  setProjects
+  fetchProjects
 } from '../../redux/actions';
-import { ProjectModel } from '../../resources/models';
-import { ProjectCreateRequest, ProjectUpdateRequest, ProjectDeleteRequest } from "../../interfaces";
+import { ProjectCreateRequest, ProjectUpdateRequest } from '../../interfaces';
 
 export const useProjectState = () => useSelector(({
   projectReducer

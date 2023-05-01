@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
-import {useAuthState} from "../../../hooks/redux";
-import { managerSidebarItems, accountantSidebarItems, employeeSidebarItems } from "../../../constants";
-import {Link, useLocation} from "react-router-dom"
+import React, { useEffect, useState } from 'react';
+import { useAuthState } from '../../../hooks/redux';
+import { managerSidebarItems, accountantSidebarItems } from '../../../constants';
+import { Link, useLocation } from 'react-router-dom';
 
 const Sidebar = () => {
   const { account } = useAuthState();
@@ -20,11 +20,11 @@ const Sidebar = () => {
   }, [account]);
 
   return (
-    <div className="w-72 py-3 bg-gray-200">
-      <h2 className="font-bold text-center text-3xl">
+    <div className='w-72 py-3 bg-gray-200'>
+      <h2 className='font-bold text-center text-3xl'>
         Invoice
       </h2>
-      <div className="flex flex-col space-y-3 mt-4">
+      <div className='flex flex-col space-y-3 mt-4'>
         {
           sidebarItems.map((item) => (
             <Link

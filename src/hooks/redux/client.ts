@@ -4,11 +4,9 @@ import {
   createClient,
   updateClient,
   deleteClient,
-  fetchClients,
-  setClients
+  fetchClients
 } from '../../redux/actions';
-import { ClientModel } from '../../resources/models';
-import { ClientCreateRequest, ClientUpdateRequest, ClientDeleteRequest } from "../../interfaces";
+import { ClientCreateRequest, ClientUpdateRequest } from '../../interfaces';
 
 export const useClientState = () => useSelector(({
   clientReducer

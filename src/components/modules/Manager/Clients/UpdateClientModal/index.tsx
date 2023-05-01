@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { Button, TextField, Dialog, DialogContent, DialogTitle } from '@mui/material';
-import { useUpdateClientAction } from "../../../../../hooks/redux";
-import { ClientUpdateRequest } from "../../../../../interfaces";
-import { ClientModel } from "../../../../../resources/models";
+import { useUpdateClientAction } from '../../../../../hooks/redux';
+import { ClientUpdateRequest } from '../../../../../interfaces';
+import { ClientModel } from '../../../../../resources/models';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -64,17 +64,23 @@ const UpdateClientModal: FC<IUpdateClientModalProps> = ({
             <TextField
               autoFocus
               helperText={ form.errors.name && form.touched.name ? form.errors.name : '' }
-              label="Client Name"
-              type="text"
+              label='Client Name'
+              type='text'
               fullWidth
-              variant="standard"
+              variant='standard'
               {...form.getFieldProps('name')}
             />
-            <div className="my-2 space-x-2">
-              <Button type="submit" variant="outlined">
+            <div className='my-2 space-x-2'>
+              <Button
+                type='submit'
+                variant='outlined'
+              >
                 Save
               </Button>
-              <Button onClick={handleClose} variant="outlined">
+              <Button
+                onClick={handleClose}
+                variant='outlined'
+              >
                 Cancel
               </Button>
             </div>

@@ -9,7 +9,7 @@ import {
   TextField,
   Button
 } from '@mui/material';
-import { UserFormValues } from "../../../interfaces";
+import { UserFormValues } from '../../../interfaces';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
@@ -41,14 +41,14 @@ const Register = () => {
     <div className='py-4 px-8'>
       <div className='text-center'>
         <Typography
-          variant="h5"
-          color="primary"
+          variant='h5'
+          color='primary'
           mb={3}
         >
           REGISTER
         </Typography>
         <Typography
-          variant="body1"
+          variant='body1'
           mb={3}
         >
           Welcome! Please enter your information
@@ -58,31 +58,31 @@ const Register = () => {
       <form onSubmit={form.handleSubmit}>
         <TextField
           fullWidth
-          label="Name"
+          label='Name'
           {...form.getFieldProps('name')}
           helperText={ form.errors.name && form.touched.name ? form.errors.name : '' }
           sx={{ mb: 3 }}
         />
         <TextField
           fullWidth
-          label="Email"
+          label='Email'
           {...form.getFieldProps('email')}
           helperText={ form.errors.email && form.touched.email ? form.errors.email : '' }
           sx={{ mb: 3 }}
         />
         <TextField
           fullWidth
-          label="Password"
-          type="password"
-          placeholder="Enter your password"
+          label='Password'
+          type='password'
+          placeholder='Enter your password'
           {...form.getFieldProps('password')}
           helperText={ form.errors.password && form.touched.password ? form.errors.password : '' }
           sx={{ mb: 3 }}
         />
         <TextField
           fullWidth
-          label="Confirm Password"
-          type="password"
+          label='Confirm Password'
+          type='password'
           {...form.getFieldProps('confirmPassword')}
           helperText={ form.errors.confirmPassword && form.touched.confirmPassword ? form.errors.confirmPassword : '' }
           sx={{ mb: 3 }}
@@ -97,9 +97,9 @@ const Register = () => {
         </div>
         <div className='flex items-center justify-center'>
           <Button
-            type="submit"
-            variant="contained"
-            color="primary"
+            type='submit'
+            variant='contained'
+            color='primary'
           >
             Register
           </Button>

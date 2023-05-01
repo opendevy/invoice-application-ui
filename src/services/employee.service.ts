@@ -1,7 +1,6 @@
-import apiClient from ".";
+import apiClient from '.';
 import {
   EmployeeCreateRequest,
-  EmployeeDeleteRequest,
   EmployeeUpdateRequest
 } from "../interfaces";
 

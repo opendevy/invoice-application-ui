@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from "react";
-import moment from "moment";
+import React, { useEffect, useState } from 'react';
+import moment from 'moment';
 import * as WorkService from '../../../../services/work.service';
-import {FormControl, Input, InputAdornment, InputLabel} from "@mui/material";
-import {FaSearch} from "react-icons/fa";
+import { FormControl, Input, InputAdornment, InputLabel } from '@mui/material';
+import { FaSearch } from 'react-icons/fa';
 
 const AllHistories = () => {
   const [histories, setHistories] = useState<any[]>();
@@ -20,21 +20,20 @@ const AllHistories = () => {
 
   const handleKeyword = (value: string) => {
     setKeyword(value);
-    console.log(value)
   };
   
   return (
-    <div className="my-4">
-      <div className="my-4">
-        <FormControl variant="standard">
-          <InputLabel htmlFor="input-with-icon-adornment">
+    <div className='my-4'>
+      <div className='my-4'>
+        <FormControl variant='standard'>
+          <InputLabel htmlFor='input-with-icon-adornment'>
             Search Histories
           </InputLabel>
           <Input
-            id="input-with-icon-adornment"
-            placeholder="Search keyword..."
+            id='input-with-icon-adornment'
+            placeholder='Search keyword...'
             startAdornment={
-              <InputAdornment position="start">
+              <InputAdornment position='start'>
                 <FaSearch />
               </InputAdornment>
             }
@@ -43,36 +42,42 @@ const AllHistories = () => {
           />
         </FormControl>
       </div>
-      <table className="w-full">
+      <table className='w-full'>
         <thead>
-          <tr className="border">
-            <td className="p-2">Employee</td>
-            <td className="p-2">Project</td>
-            <td className="p-2">Start</td>
-            <td className="p-2">End</td>
+          <tr className='border'>
+            <td className='p-2'>Employee</td>
+            <td className='p-2'>Project</td>
+            <td className='p-2'>Start</td>
+            <td className='p-2'>End</td>
           </tr>
         </thead>
         <tbody>
-        {
-          histories && histories.length > 0 && histories.map((history) => (
-            <tr key={history._id} className="border">
-              <td className="p-2">
-                {history.employee.name}
-              </td>
-              <td className="p-2">
-                {history.project.name}
-              </td>
-              <td className="p-2">
-                {moment(history.startTime).format('hh:mm:ss MMMM, DD, YYYY')}
-              </td>
-              <td className="p-2">
-                {moment(history.endTime).format('hh:mm:ss MMMM, DD, YYYY')}
-              </td>
-            </tr>
-          ))
-        }
+          {
+            histories && histories.length > 0 && histories.map((history) => (
+              <tr key={history._id} className="border">
+                <td className="p-2">
+                  {history.employee.name}
+                </td>
+                <td className="p-2">
+                  {history.project.name}
+                </td>
+                <td className="p-2">
+                  {moment(history.startTime).format('hh:mm:ss MMMM, DD, YYYY')}
+                </td>
+                <td className="p-2">
+                  {moment(history.endTime).format('hh:mm:ss MMMM, DD, YYYY')}
+                </td>
+              </tr>
+            ))
+          }
         </tbody>
       </table>
+      {
+        histories && histories.length === 0 &&
+        <div className="flex justify-center py-8 text-xl font-bold">
+          No Data...
+        </div>
+      }
     </div>
   );
 };

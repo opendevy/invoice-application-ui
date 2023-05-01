@@ -1,9 +1,9 @@
-import {Dispatch} from 'redux';
-import {AUTH_ACTIONS} from '../types';
+import { Dispatch } from 'redux';
+import { AUTH_ACTIONS } from '../types';
 import * as UserService from '../../services/user.service';
-import {Tokens} from '../reducers/auth.reducer';
-import {UserModel} from '../../resources/models';
-import {ForgotPasswordRequest, LoginRequest, ResetPasswordRequest, UserCreateRequest} from "../../interfaces";
+import { Tokens } from '../reducers/auth.reducer';
+import { UserModel } from '../../resources/models';
+import { ForgotPasswordRequest, LoginRequest, ResetPasswordRequest, UserCreateRequest } from '../../interfaces';
 
 export const setToken = (tokens: Tokens) => ({
   type: AUTH_ACTIONS.SET_TOKEN,

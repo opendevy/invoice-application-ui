@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Button } from "@mui/material";
-import AddEmployeeModal from "../../components/modules/Manager/Employees/AddEmployeeModal";
-import { useEmployeeState, useFetchEmployeesAction } from "../../hooks/redux";
-import EmployeeItem from "../../components/modules/Manager/Employees/EmployeeItem";
+import React, { useEffect, useState } from 'react';
+import { Button } from '@mui/material';
+import AddEmployeeModal from '../../components/modules/Manager/Employees/AddEmployeeModal';
+import { useEmployeeState, useFetchEmployeesAction } from '../../hooks/redux';
+import EmployeeItem from '../../components/modules/Manager/Employees/EmployeeItem';
 
 const Employees = () => {
   const { employees } = useEmployeeState();
@@ -19,18 +19,18 @@ const Employees = () => {
 
   return (
     <div>
-      <h2 className="font-bold text-4xl">
+      <h2 className='font-bold text-4xl'>
         Employees
       </h2>
-      <div className="flex justify-end my-4">
+      <div className='flex justify-end my-4'>
         <Button
-          variant="contained"
+          variant='contained'
           onClick={handleAddModal}
         >
           + Add New Employee
         </Button>
       </div>
-      <div className="grid grid-cols-5 gap-4 mt-6">
+      <div className='grid grid-cols-5 gap-4 mt-6'>
         {
           employees.map((employee) => (
             <EmployeeItem

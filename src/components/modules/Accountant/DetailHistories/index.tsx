@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   FormControl,
   InputLabel,
@@ -6,11 +6,11 @@ import {
   MenuItem,
   FormHelperText,
   SelectChangeEvent
-} from "@mui/material";
-import { useEmployeeState, useFetchEmployeesAction } from "../../../../hooks/redux";
-import { ProjectModel } from "../../../../resources/models";
-import { useAccount } from "../../../../context/account.context";
-import DetailLogModal from "./DetailLogModal";
+} from '@mui/material';
+import { useEmployeeState, useFetchEmployeesAction } from '../../../../hooks/redux';
+import { ProjectModel } from '../../../../resources/models';
+import { useAccount } from '../../../../context/account.context';
+import DetailLogModal from './DetailLogModal';
 
 const DetailHistories = () => {
   const { fetchReservedProjects, reservedProjects } = useAccount();
@@ -44,23 +44,23 @@ const DetailHistories = () => {
   };
   
   return (
-    <div className="my-4">
+    <div className='my-4'>
       <div>
         <FormControl
           sx={{ my: 1, minWidth: 200 }}
           error={employee === ''}
         >
-          <InputLabel id="demo-simple-select-error-label">
+          <InputLabel id='demo-simple-select-error-label'>
             Employee
           </InputLabel>
           <Select
-            labelId="demo-simple-select-error-label"
-            id="demo-simple-select-error"
+            labelId='demo-simple-select-error-label'
+            id='demo-simple-select-error'
             value={employee}
-            label="Employee"
+            label='Employee'
             onChange={handleEmployeeChange}
           >
-            <MenuItem value="">
+            <MenuItem value=''>
               <em>None</em>
             </MenuItem>
             {
@@ -81,14 +81,14 @@ const DetailHistories = () => {
         </FormControl>
         {
           employee && (
-            reservedProjects ? (
+            reservedProjects && reservedProjects.length > 0 ? (
               <div>
-                <table className="w-full">
+                <table className='w-full'>
                   <thead>
-                    <tr className="border">
-                      <th className="p-2">Project Name</th>
-                      <th className="p-2">Client</th>
-                      <th className="p-2">Budget</th>
+                    <tr className='border'>
+                      <th className='p-2'>Project Name</th>
+                      <th className='p-2'>Client</th>
+                      <th className='p-2'>Budget</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -96,16 +96,16 @@ const DetailHistories = () => {
                     reservedProjects.map((reservedProject: ProjectModel) => (
                       <tr
                         key={reservedProject._id}
-                        className="border cursor-pointer"
+                        className='border cursor-pointer'
                         onClick={() => handleDetailModal(reservedProject)}
                       >
-                        <td className="p-2 text-center">
+                        <td className='p-2 text-center'>
                           {reservedProject.name}
                         </td>
-                        <td className="p-2 text-center">
+                        <td className='p-2 text-center'>
                           {reservedProject.client.name}
                         </td>
-                        <td className="p-2 text-center">
+                        <td className='p-2 text-center'>
                           {reservedProject.budget}
                         </td>
                       </tr>
@@ -115,7 +115,9 @@ const DetailHistories = () => {
                 </table>
               </div>
             ) : (
-              <div>No Data...</div>
+              <div className='flex justify-center py-8 text-xl font-bold'>
+                No Data...
+              </div>
             )
           )
         }

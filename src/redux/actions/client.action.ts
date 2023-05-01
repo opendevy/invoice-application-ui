@@ -4,9 +4,8 @@ import * as ClientService from '../../services/client.service';
 import { ClientModel } from '../../resources/models';
 import {
   ClientCreateRequest,
-  ClientUpdateRequest,
-  ClientDeleteRequest
-} from "../../interfaces";
+  ClientUpdateRequest
+} from '../../interfaces';
 
 export const addClient = (client: ClientModel) => ({
   type: CLIENT_ACTIONS.ADD_CLIENT,

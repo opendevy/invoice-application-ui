@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useHistory } from "react-router";
-import { ProjectModel, ReservationModel } from "../../../resources/models";
-import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
-import * as ProjectService from "../../../services/project.service";
-import ReservedEmployeeItem from "../../../components/modules/Manager/Projects/ReservedEmployeeItem";
+import React, { useEffect, useState } from 'react';
+import { useLocation, useHistory } from 'react-router';
+import { ProjectModel, ReservationModel } from '../../../resources/models';
+import { Button, TextField } from '@mui/material';
+import * as ProjectService from '../../../services/project.service';
+import ReservedEmployeeItem from '../../../components/modules/Manager/Projects/ReservedEmployeeItem';
 
 type ProjectDetail = {
   projectData: ProjectModel | undefined;
@@ -46,43 +45,43 @@ const ProjectDetail = () => {
 
   return (
     <div>
-      <h2 className="font-bold text-4xl">
+      <h2 className='font-bold text-4xl'>
         Project Detail
       </h2>
       {
         project &&
-          <div className="space-y-6 my-4">
-            <h2 className="font-bold text-xl">
+          <div className='space-y-6 my-4'>
+            <h2 className='font-bold text-xl'>
               Client: {project.projectData?.client.name}
             </h2>
-            <h2 className="font-bold text-xl">
+            <h2 className='font-bold text-xl'>
               Project Name: {project.projectData?.name}
             </h2>
             <TextField
               autoFocus
-              name="budget"
-              label="Budget"
-              type="number"
+              name='budget'
+              label='Budget'
+              type='number'
               fullWidth
-              variant="standard"
+              variant='standard'
               value={project?.projectData?.budget}
               onChange={(e) => handleProjectData(e.target)}
             />
             <TextField
               autoFocus
-              name="name"
-              label="Project Name"
+              name='name'
+              label='Project Name'
               fullWidth
-              variant="standard"
+              variant='standard'
               value={project?.projectData?.name}
               onChange={(e) => handleProjectData(e.target)}
             />
             <div>
-              <h4 className="text-xl font-bold">
+              <h4 className='text-xl font-bold'>
                 Reserved Employees
               </h4>
-              <div className="my-4">
-                <table className="w-full">
+              <div className='my-4'>
+                <table className='w-full'>
                   <thead>
                     <tr>
                       <td>
@@ -114,16 +113,16 @@ const ProjectDetail = () => {
                 </table>
               </div>
             </div>
-            <div className="flex justify-around">
+            <div className='flex justify-around'>
               <Button
                 onClick={handleProjectUpdate}
-                variant="contained"
+                variant='contained'
               >
                 Update
               </Button>
               <Button
                 onClick={goBack}
-                variant="contained"
+                variant='contained'
               >
                 Go Back
               </Button>

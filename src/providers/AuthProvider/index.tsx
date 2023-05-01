@@ -18,10 +18,10 @@ const AuthProvider: FC = ({ children }) => {
       return;
     }
 
-    if (typeof tokens.accessToken === "string") {
+    if (typeof tokens.accessToken === 'string') {
       localStorage.setItem('access_token', tokens.accessToken);
     }
-    if (typeof tokens.refreshToken === "string") {
+    if (typeof tokens.refreshToken === 'string') {
       localStorage.setItem('refresh_token', tokens.refreshToken);
     }
 

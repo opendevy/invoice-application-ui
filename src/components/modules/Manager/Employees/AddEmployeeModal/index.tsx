@@ -6,8 +6,8 @@ import {
   DialogContent,
   DialogTitle
 } from '@mui/material';
-import { useCreateEmployeeAction } from "../../../../../hooks/redux";
-import {EmployeeCreateRequest} from "../../../../../interfaces";
+import { useCreateEmployeeAction } from '../../../../../hooks/redux';
+import { EmployeeCreateRequest } from '../../../../../interfaces';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -50,7 +50,7 @@ const AddEmployeeModal: FC<IAddEmployeeModalProps> = ({
       <Dialog
         open={isOpened}
         onClose={handleClose}
-        maxWidth="lg"
+        maxWidth='lg'
       >
         <DialogTitle
           sx={{
@@ -69,27 +69,33 @@ const AddEmployeeModal: FC<IAddEmployeeModalProps> = ({
             <TextField
               autoFocus
               helperText={ form.errors.name && form.touched.name ? form.errors.name : '' }
-              label="Employee Name"
-              type="text"
+              label='Employee Name'
+              type='text'
               fullWidth
-              variant="standard"
+              variant='standard'
               {...form.getFieldProps('name')}
             />
             <TextField
               autoFocus
               {...form.getFieldProps('email')}
-              label="Email"
-              type="email"
+              label='Email'
+              type='email'
               fullWidth
-              variant="standard"
+              variant='standard'
               sx={{ marginTop: 2 }}
               helperText={ form.errors.email && form.touched.email ? form.errors.email : '' }
             />
-            <div className="my-2 space-x-2">
-              <Button type="submit" variant="outlined">
+            <div className='my-2 space-x-2'>
+              <Button
+                type='submit'
+                variant='outlined'
+              >
                 Save
               </Button>
-              <Button onClick={handleClose} variant="outlined">
+              <Button
+                onClick={handleClose}
+                variant='outlined'
+              >
                 Cancel
               </Button>
             </div>

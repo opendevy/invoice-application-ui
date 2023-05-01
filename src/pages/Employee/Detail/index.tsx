@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import {ProjectModel, ReservationModel} from "../../../resources/models";
-import * as ProjectService from "../../../services/project.service";
-import * as WorkService from "../../../services/work.service";
-import { Button } from "@mui/material";
-import ReservationModal from "../../../components/modules/Employee/ReservationModal";
-import { FaTimes } from "react-icons/fa";
-import { useHistory } from "react-router";
-import {toast} from "react-toastify";
-import {useAccount} from "../../../context/account.context";
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { ProjectModel, ReservationModel } from '../../../resources/models';
+import * as ProjectService from '../../../services/project.service';
+import * as WorkService from '../../../services/work.service';
+import { Button } from '@mui/material';
+import ReservationModal from '../../../components/modules/Employee/ReservationModal';
+import { FaTimes } from 'react-icons/fa';
+import { useHistory } from 'react-router';
+import { toast } from 'react-toastify';
+import { useAccount } from '../../../context/account.context';
 
 type ProjectDetail = {
   projectData: ProjectModel | undefined;
@@ -72,22 +72,22 @@ const EmployeeProjectDetail = () => {
   
   return (
     <div>
-      <div className="flex justify-between items-center">
-        <h2 className="font-bold text-4xl">
+      <div className='flex justify-between items-center'>
+        <h2 className='font-bold text-4xl'>
           Project Detail
         </h2>
         <FaTimes
-          className="text-xl cursor-pointer"
+          className='text-xl cursor-pointer'
           onClick={goBack}
         />
       </div>
       {
         project && project.projectData &&
-          <div className="space-y-6 my-4">
-            <h2 className="font-bold text-xl">
+          <div className='space-y-6 my-4'>
+            <h2 className='font-bold text-xl'>
               Project Name: {project.projectData.name}
             </h2>
-            <h2 className="font-bold text-xl">
+            <h2 className='font-bold text-xl'>
               Client: {project.projectData.client.name}
             </h2>
             <div>
@@ -105,20 +105,20 @@ const EmployeeProjectDetail = () => {
                   <div>
                     Status: {project.reservation.status}
                   </div>
-                  <div className="flex justify-center">
+                  <div className='flex justify-center'>
                     {
                       isStarted ? (
                         <Button
-                          variant="outlined"
-                          color="secondary"
+                          variant='outlined'
+                          color='secondary'
                           onClick={handleEndWork}
                         >
                           End Work
                         </Button>
                       ) : (
                         <Button
-                          variant="outlined"
-                          color="info"
+                          variant='outlined'
+                          color='info'
                           onClick={handleStartWork}
                         >
                           Start Work
@@ -128,10 +128,10 @@ const EmployeeProjectDetail = () => {
                   </div>
                 </>
               ) : (
-                <div className="flex justify-center">
+                <div className='flex justify-center'>
                   <Button
-                    variant="outlined"
-                    color="secondary"
+                    variant='outlined'
+                    color='secondary'
                     onClick={handleReservationModal}
                   >
                     Reservation this project

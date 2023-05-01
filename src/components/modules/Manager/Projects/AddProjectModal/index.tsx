@@ -3,8 +3,8 @@ import {
   useCreateProjectAction,
   useFetchProjectsAction,
   useClientState
-} from "../../../../../hooks/redux";
-import { ProjectCreateRequest } from "../../../../../interfaces";
+} from '../../../../../hooks/redux';
+import { ProjectCreateRequest } from '../../../../../interfaces';
 import {
   FormControl,
   InputLabel,
@@ -15,7 +15,7 @@ import {
   Dialog,
   DialogContent,
   DialogTitle
-} from "@mui/material";
+} from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -66,7 +66,7 @@ const AddProjectModal: FC<IAddProjectModalProps> = ({
       <Dialog
         open={isOpened}
         onClose={handleClose}
-        maxWidth="lg"
+        maxWidth='lg'
       >
         <DialogTitle
           sx={{
@@ -85,28 +85,30 @@ const AddProjectModal: FC<IAddProjectModalProps> = ({
             <TextField
               sx={{ marginBottom: 2 }}
               autoFocus
-              label="Project Name"
-              type="text"
+              label='Project Name'
+              type='text'
               fullWidth
-              variant="standard"
+              variant='standard'
               {...form.getFieldProps('name')}
               helperText={ form.errors.name && form.touched.name ? form.errors.name : '' }
             />
             <TextField
               autoFocus
-              label="Budget"
-              type="text"
+              label='Budget'
+              type='text'
               fullWidth
-              variant="standard"
+              variant='standard'
               helperText={ form.errors.budget && form.touched.budget ? form.errors.budget : '' }
               {...form.getFieldProps('budget')}
             />
             <FormControl fullWidth sx={{ marginTop: 2 }}>
-              <InputLabel id="demo-simple-select-label">Client</InputLabel>
+              <InputLabel id='demo-simple-select-label'>
+                Client
+              </InputLabel>
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="Client"
+                labelId='demo-simple-select-label'
+                id='demo-simple-select'
+                label='Client'
                 {...form.getFieldProps('client')}
                   // helperText={ form.errors.client && form.touched.client ? form.errors.client : '' }
               >
@@ -119,11 +121,17 @@ const AddProjectModal: FC<IAddProjectModalProps> = ({
                 }
               </Select>
             </FormControl>
-            <div className="my-2 space-x-2">
-              <Button type="submit" variant="outlined">
+            <div className='my-2 space-x-2'>
+              <Button
+                type='submit'
+                variant='outlined'
+              >
                 Save
               </Button>
-              <Button onClick={handleClose} variant="outlined">
+              <Button
+                onClick={handleClose}
+                variant='outlined'
+              >
                 Cancel
               </Button>
             </div>

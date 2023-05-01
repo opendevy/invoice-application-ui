@@ -1,8 +1,8 @@
-import React, {FC, useState} from "react";
-import {ReservationModel, UserModel} from "../../../../../resources/models";
+import React, { FC } from 'react';
+import { ReservationModel, UserModel } from '../../../../../resources/models';
 import Switch from '@mui/material/Switch';
 import * as ReservationService from '../../../../../services/reservation.service';
-import {toast} from "react-toastify";
+import { toast } from 'react-toastify';
 
 interface IReservedEmployeeItem {
   employee: UserModel;
@@ -42,7 +42,7 @@ const ReservedEmployeeItem: FC<IReservedEmployeeItem> = ({
         <Switch
           checked={ownReservation?.status === 'approved'}
           onChange={handleChange}
-          color="secondary"
+          color='secondary'
           inputProps={{ 'aria-label': 'controlled' }}
         />
       </td>

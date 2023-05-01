@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import * as ReservationService from "../services/reservation.service";
-import * as ProjectService from "../services/project.service";
-import * as WorkHistoryService from "../services/work.service";
-import { ProjectModel } from "../resources/models";
+import React, { useState } from 'react';
+import * as ReservationService from '../services/reservation.service';
+import * as ProjectService from '../services/project.service';
+import * as WorkHistoryService from '../services/work.service';
+import { ProjectModel } from '../resources/models';
 
 const AccountContext = React.createContext({} as any);
 

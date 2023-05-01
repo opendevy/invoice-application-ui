@@ -1,14 +1,14 @@
 import React, { useState, FC } from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import {useAccount} from "../../../../context/account.context";
-import {ProjectModel} from "../../../../resources/models";
-// import { useCreateEmployeeAction } from "../../../../../hooks/redux";
-// import {EmployeeCreateRequest} from "../../../../../interfaces";
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle
+} from '@mui/material';
+import { useAccount } from '../../../../context/account.context';
+import { ProjectModel } from '../../../../resources/models';
 
 interface IReservationModalProps {
   isOpened: boolean;
@@ -46,7 +46,7 @@ const ReservationModal: FC<IReservationModalProps> = ({
       <Dialog
         open={isOpened}
         onClose={handleClose}
-        maxWidth="lg"
+        maxWidth='lg'
       >
         <DialogTitle
           sx={{
@@ -63,11 +63,11 @@ const ReservationModal: FC<IReservationModalProps> = ({
         >
           <TextField
             autoFocus
-            name="rate"
-            label="Hourly Rate"
-            type="number"
+            name='rate'
+            label='Hourly Rate'
+            type='number'
             fullWidth
-            variant="standard"
+            variant='standard'
             onChange={(e) => handleReservationData(e.target.value)}
           />
         </DialogContent>

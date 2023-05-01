@@ -4,9 +4,8 @@ import * as EmployeeService from '../../services/employee.service';
 import { EmployeeModel } from '../../resources/models';
 import {
   EmployeeCreateRequest,
-  EmployeeUpdateRequest,
-  EmployeeDeleteRequest
-} from "../../interfaces";
+  EmployeeUpdateRequest
+} from '../../interfaces';
 
 export const addEmployee = (employee: EmployeeModel) => ({
   type: EMPLOYEE_ACTIONS.ADD_EMPLOYEE,

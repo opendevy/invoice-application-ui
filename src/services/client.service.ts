@@ -1,9 +1,8 @@
-import apiClient from ".";
+import apiClient from '.';
 import {
   ClientCreateRequest,
-  ClientDeleteRequest,
   ClientUpdateRequest
-} from "../interfaces";
+} from '../interfaces';
 
 export async function createClient(data: ClientCreateRequest) {
   return apiClient

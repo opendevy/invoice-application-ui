@@ -5,7 +5,7 @@ import { ProjectModel } from '../../resources/models';
 import {
   ProjectCreateRequest,
   ProjectUpdateRequest
-} from "../../interfaces";
+} from '../../interfaces';
 
 export const addProject = (project: ProjectModel) => ({
   type: PROJECT_ACTIONS.ADD_PROJECT,

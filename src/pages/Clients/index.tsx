@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Button } from "@mui/material";
-import AddClientModal from "../../components/modules/Manager/Clients/AddClientModal";
-import { useClientState, useFetchClientsAction } from "../../hooks/redux";
-import ClientItem from "../../components/modules/Manager/Clients/ClientItem";
+import React, { useEffect, useState } from 'react';
+import { Button } from '@mui/material';
+import AddClientModal from '../../components/modules/Manager/Clients/AddClientModal';
+import { useClientState, useFetchClientsAction } from '../../hooks/redux';
+import ClientItem from '../../components/modules/Manager/Clients/ClientItem';
 
 const Clients = () => {
   const { clients } = useClientState();
@@ -19,18 +19,18 @@ const Clients = () => {
 
   return (
     <div>
-      <h2 className="font-bold text-4xl">
+      <h2 className='font-bold text-4xl'>
         Client
       </h2>
-      <div className="flex justify-end">
+      <div className='flex justify-end'>
         <Button
-          variant="contained"
+          variant='contained'
           onClick={handleAddModal}
         >
           + Add New Client
         </Button>
       </div>
-      <div className="mt-8 space-y-4">
+      <div className='mt-8 space-y-4'>
         {
           clients.map((client) => (
             <ClientItem
