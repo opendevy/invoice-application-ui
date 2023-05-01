@@ -1,75 +1,29 @@
 import React, { useState } from "react";
 import * as ReservationService from "../services/reservation.service";
+import * as ProjectService from "../services/project.service";
+import {ProjectModel} from "../resources/models";
 
 const AccountContext = React.createContext({} as any);
 
 function AccountProvider(props: any) {
-  // const [rooms, setRooms] = useState<any[]>();
-  // const [reservations, setReservations] = useState<any[]>();
-  // const [selectedRoomData, setSelectedRoomData] = useState<any>({});
+  const [reservedProjects, setReservedProjects] = useState<ProjectModel[]>();
 
   async function createReservation(project_id: string, hourlyRate: number) {
     return await ReservationService.createReservation(project_id, hourlyRate).then(res => res)
   }
   
-  // async function createRoom(price: string, type: string, file: any) {
-  //   return await RoomService.create(type, price, file).then((res) => res);
-  // }
-  //
-  // async function fetchRooms(query: any = {}) {
-  //   return await RoomService.fetchRooms(query).then((res) => {
-  //     setRooms(res);
-  //   });
-  // }
-  //
-  // async function updateRoom(log_id: string, price: number, activity: boolean) {
-  //   return await RoomService.updateRoom(log_id, price, activity).then((res) => {
-  //     fetchRooms();
-  //   })
-  // }
-  //
-  // async function deleteRoom(roomId: string) {
-  //   return await RoomService.deleteRoom(roomId).then((res) => res);
-  // }
-  //
-  // async function handleSelectedRoomData(roomData: any) {
-  //   setSelectedRoomData(roomData);
-  // }
-  //
-  // async function createReservation() {
-  //   return await ReservationService.create(selectedRoomData._id, selectedRoomData.startDate, selectedRoomData.endDate)
-  //     .then((res) => res);
-  // }
-  //
-  // async function fetchReservations(query: any = {}) {
-  //   return await ReservationService.fetchReservations(query).then((res) => {
-  //     setReservations(res);
-  //   });
-  // }
-  //
-  // async function updateReservation(log_id: string, activity: boolean) {
-  //   return await ReservationService.updateReservation(log_id, activity).then((res) => {
-  //     fetchReservations();
-  //   })
-  // }
+  async function fetchReservedProjects(employee_id: string) {
+    return await ProjectService.fetchReservedProjects(employee_id).then((res) => {
+      setReservedProjects(res);
+    })
+  }
 
   return (
     <AccountContext.Provider
       value={{
-        createReservation
-        // createRoom,
-        // fetchRooms,
-        // updateRoom,
-        // rooms,
-        // reservations,
-        // deleteRoom,
-        // selectedRoomData,
-        // handleSelectedRoomData,
-        // createReservation,
-        // fetchReservations,
-        // updateReservation,
-        // confirmModal,
-        // setConfirmModal
+        createReservation,
+        fetchReservedProjects,
+        reservedProjects
       }}
       {...props}
     />

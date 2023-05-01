@@ -1,7 +1,6 @@
 import apiClient from ".";
 import {
   ProjectCreateRequest,
-  ProjectDeleteRequest,
   ProjectUpdateRequest
 } from "../interfaces";
 
@@ -16,15 +15,28 @@ export async function createProject(data: ProjectCreateRequest) {
     });
 }
 
-export async function fetchProjects() {
+export async function fetchProjects(query?: any) {
   return apiClient
-    .get('/projects')
+    .get('/projects', {
+      params: query
+    })
     .then((response) => {
       if (response) {
         return response.data;
       }
       return Promise.reject();
     });
+}
+
+export async function fetchReservedProjects(employee_id: string) {
+  return apiClient
+    .get(`/projects/${employee_id}/reserved`)
+    .then((res) => {
+      if (res) {
+        return res.data;
+      }
+      return Promise.reject();
+    })
 }
 
 export async function fetchProject(id: string) {
