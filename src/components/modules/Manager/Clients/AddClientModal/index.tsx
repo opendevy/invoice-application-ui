@@ -1,42 +1,41 @@
-import React, { useState, FC } from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
+import React, { FC } from 'react';
+import { Button, TextField, Dialog, DialogContent, DialogTitle } from '@mui/material';
 import { useCreateClientAction } from "../../../../../hooks/redux";
-import {ClientCreateRequest} from "../../../../../interfaces";
+import { ClientCreateRequest } from "../../../../../interfaces";
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 interface IAddClientModalProps {
   isOpened: boolean;
   handleModal: () => void;
 }
 
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required('Name is required')
+});
+
 const AddClientModal: FC<IAddClientModalProps> = ({
   isOpened,
   handleModal
 }) => {
   const addNewClient = useCreateClientAction();
-  const [newClientData, setNewClientData] = useState<ClientCreateRequest>({
-    name: ''
-  });
 
   const handleClose = () => {
     handleModal();
   };
 
-  const handleSave = async () => {
-    await addNewClient(newClientData);
+  const handleSubmit = async (values: ClientCreateRequest) => {
+    await addNewClient(values);
     handleClose();
-  };
+  }
 
-  const handleNewClientData = (e: any) => {
-    setNewClientData({
-      ...newClientData,
-      [e.name]: e.value
-    });
-  };
+  const form = useFormik({
+    validationSchema,
+    initialValues: {
+      name: ''
+    },
+    onSubmit: handleSubmit
+  });
 
   return (
     <div>
@@ -58,24 +57,26 @@ const AddClientModal: FC<IAddClientModalProps> = ({
             width: 400
           }}
         >
-          <TextField
-            autoFocus
-            name="name"
-            label="Client Name"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={(e) => handleNewClientData(e.target)}
-          />
+          <form onSubmit={form.handleSubmit}>
+            <TextField
+              autoFocus
+              helperText={ form.errors.name && form.touched.name ? form.errors.name : '' }
+              label="Client Name"
+              type="text"
+              fullWidth
+              variant="standard"
+              {...form.getFieldProps('name')}
+            />
+            <div className="my-2 space-x-2">
+              <Button type="submit" variant="outlined">
+                Save
+              </Button>
+              <Button onClick={handleClose} variant="outlined">
+                Cancel
+              </Button>
+            </div>
+          </form>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleSave}>
-            Save
-          </Button>
-          <Button onClick={handleClose}>
-            Cancel
-          </Button>
-        </DialogActions>
       </Dialog>
     </div>
   );

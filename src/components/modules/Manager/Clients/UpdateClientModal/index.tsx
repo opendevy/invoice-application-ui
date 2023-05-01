@@ -1,13 +1,10 @@
-import React, { useState, FC } from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import {useUpdateClientAction} from "../../../../../hooks/redux";
-import {ClientCreateRequest, ClientUpdateRequest} from "../../../../../interfaces";
-import {ClientModel} from "../../../../../resources/models";
+import React, { FC } from 'react';
+import { Button, TextField, Dialog, DialogContent, DialogTitle } from '@mui/material';
+import { useUpdateClientAction } from "../../../../../hooks/redux";
+import { ClientUpdateRequest } from "../../../../../interfaces";
+import { ClientModel } from "../../../../../resources/models";
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 interface IUpdateClientModalProps {
   isOpened: boolean;
@@ -15,31 +12,33 @@ interface IUpdateClientModalProps {
   client: ClientModel;
 }
 
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required('Name is required')
+});
+
 const UpdateClientModal: FC<IUpdateClientModalProps> = ({
   isOpened,
   handleModal,
   client
 }) => {
   const updateClient = useUpdateClientAction();
-  const [clientData, setClientData] = useState<ClientUpdateRequest>({
-    name: client.name
-  });
 
   const handleClose = () => {
     handleModal();
   };
 
-  const handleSave = async () => {
-    await updateClient(clientData, client._id);
+  const handleSubmit = async (values: ClientUpdateRequest) => {
+    await updateClient(values, client._id);
     handleClose();
   };
 
-  const handleNewClientData = (e: any) => {
-    setClientData({
-      ...clientData,
-      [e.name]: e.value
-    });
-  };
+  const form = useFormik({
+    validationSchema,
+    initialValues: {
+      name: client.name
+    },
+    onSubmit: handleSubmit
+  });
 
   return (
     <div>
@@ -61,25 +60,26 @@ const UpdateClientModal: FC<IUpdateClientModalProps> = ({
             width: 400
           }}
         >
-          <TextField
-            autoFocus
-            name="name"
-            label="Client Name"
-            type="text"
-            fullWidth
-            variant="standard"
-            value={clientData.name}
-            onChange={(e) => handleNewClientData(e.target)}
-          />
+          <form onSubmit={form.handleSubmit}>
+            <TextField
+              autoFocus
+              helperText={ form.errors.name && form.touched.name ? form.errors.name : '' }
+              label="Client Name"
+              type="text"
+              fullWidth
+              variant="standard"
+              {...form.getFieldProps('name')}
+            />
+            <div className="my-2 space-x-2">
+              <Button type="submit" variant="outlined">
+                Save
+              </Button>
+              <Button onClick={handleClose} variant="outlined">
+                Cancel
+              </Button>
+            </div>
+          </form>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleSave}>
-            Save
-          </Button>
-          <Button onClick={handleClose}>
-            Cancel
-          </Button>
-        </DialogActions>
       </Dialog>
     </div>
   );

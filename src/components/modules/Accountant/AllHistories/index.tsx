@@ -17,6 +17,11 @@ const AllHistories = () => {
       setHistories(res);
     })
   }, [keyword]);
+
+  const handleKeyword = (value: string) => {
+    setKeyword(value);
+    console.log(value)
+  };
   
   return (
     <div className="my-4">
@@ -33,6 +38,8 @@ const AllHistories = () => {
                 <FaSearch />
               </InputAdornment>
             }
+            value={keyword}
+            onChange={(e) => handleKeyword(e.target.value)}
           />
         </FormControl>
       </div>
