@@ -1,10 +1,4 @@
-import React, { useState, FC, useEffect } from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
+import React, { FC, useEffect } from 'react';
 import {
   useCreateProjectAction,
   useFetchProjectsAction,
@@ -15,13 +9,26 @@ import {
   FormControl,
   InputLabel,
   MenuItem,
-  Select
+  Select,
+  Button,
+  TextField,
+  Dialog,
+  DialogContent,
+  DialogTitle
 } from "@mui/material";
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 interface IAddProjectModalProps {
   isOpened: boolean;
   handleModal: () => void;
 }
+
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required('Name is required'),
+  budget: Yup.string().required('Budget is required'),
+  client: Yup.string().required('Client is required')
+});
 
 const AddProjectModal: FC<IAddProjectModalProps> = ({
   isOpened,
@@ -30,10 +37,20 @@ const AddProjectModal: FC<IAddProjectModalProps> = ({
   const addNewProject = useCreateProjectAction();
   const { clients } = useClientState();
   const fetchProjects = useFetchProjectsAction();
-  const [newProjectData, setNewProjectData] = useState<ProjectCreateRequest>({
-    name: '',
-    budget: 0,
-    client: ''
+
+  const handleSubmit = async (values: ProjectCreateRequest) => {
+    await addNewProject(values);
+    handleClose();
+  }
+
+  const form = useFormik({
+    validationSchema,
+    initialValues: {
+      name: '',
+      budget: '',
+      client: ''
+    },
+    onSubmit: handleSubmit
   });
 
   useEffect(() => {
@@ -42,18 +59,6 @@ const AddProjectModal: FC<IAddProjectModalProps> = ({
 
   const handleClose = () => {
     handleModal();
-  };
-
-  const handleSave = async () => {
-    await addNewProject(newProjectData);
-    handleClose();
-  };
-
-  const handleNewProjectData = (e: any) => {
-    setNewProjectData({
-      ...newProjectData,
-      [e.name]: e.value
-    });
   };
 
   return (
@@ -76,53 +81,54 @@ const AddProjectModal: FC<IAddProjectModalProps> = ({
             width: 400
           }}
         >
-          <TextField
-            sx={{ marginBottom: 2 }}
-            autoFocus
-            name="name"
-            label="Project Name"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={(e) => handleNewProjectData(e.target)}
-          />
-          <TextField
-            autoFocus
-            name="budget"
-            label="Budget"
-            type="number"
-            fullWidth
-            variant="standard"
-            onChange={(e) => handleNewProjectData(e.target)}
-          />
-          <FormControl fullWidth sx={{ marginTop: 2 }}>
-            <InputLabel id="demo-simple-select-label">Client</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={newProjectData.client}
-              label="Client"
-              name="client"
-              onChange={(e) => handleNewProjectData(e.target)}
-            >
-              {
-                clients.map((item) => (
-                  <MenuItem value={item._id} key={item._id}>
-                    {item.name}
-                  </MenuItem>
-                ))
-              }
-            </Select>
-          </FormControl>
+          <form onSubmit={form.handleSubmit}>
+            <TextField
+              sx={{ marginBottom: 2 }}
+              autoFocus
+              label="Project Name"
+              type="text"
+              fullWidth
+              variant="standard"
+              {...form.getFieldProps('name')}
+              helperText={ form.errors.name && form.touched.name ? form.errors.name : '' }
+            />
+            <TextField
+              autoFocus
+              label="Budget"
+              type="text"
+              fullWidth
+              variant="standard"
+              helperText={ form.errors.budget && form.touched.budget ? form.errors.budget : '' }
+              {...form.getFieldProps('budget')}
+            />
+            <FormControl fullWidth sx={{ marginTop: 2 }}>
+              <InputLabel id="demo-simple-select-label">Client</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                label="Client"
+                {...form.getFieldProps('client')}
+                  // helperText={ form.errors.client && form.touched.client ? form.errors.client : '' }
+              >
+                {
+                  clients.map((item) => (
+                    <MenuItem value={item._id} key={item._id}>
+                      {item.name}
+                    </MenuItem>
+                  ))
+                }
+              </Select>
+            </FormControl>
+            <div className="my-2 space-x-2">
+              <Button type="submit" variant="outlined">
+                Save
+              </Button>
+              <Button onClick={handleClose} variant="outlined">
+                Cancel
+              </Button>
+            </div>
+          </form>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleSave}>
-            Save
-          </Button>
-          <Button onClick={handleClose}>
-            Cancel
-          </Button>
-        </DialogActions>
       </Dialog>
     </div>
   );

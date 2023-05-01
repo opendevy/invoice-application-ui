@@ -1,13 +1,16 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import * as EmployeeService from "../../../services/employee.service";
-import {EmployeeModel} from "../../../resources/models";
-import {useLocation} from "react-router-dom";
-import {useHistory} from "react-router";
+import { EmployeeModel } from "../../../resources/models";
+import { useLocation } from "react-router-dom";
+import { useHistory } from "react-router";
 import TextField from "@mui/material/TextField";
-import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide} from "@mui/material";
-import {FaTrash} from "react-icons/fa";
-import {TransitionProps} from "@mui/material/transitions";
-import {useDeleteEmployeeAction} from "../../../hooks/redux";
+import { Button, Dialog, DialogActions, DialogTitle, Slide } from "@mui/material";
+import { FaTrash } from "react-icons/fa";
+import { TransitionProps } from "@mui/material/transitions";
+import { useDeleteEmployeeAction, useUpdateEmployeeAction } from "../../../hooks/redux";
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import {toast} from "react-toastify";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -18,8 +21,13 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required('Name is required')
+});
+
 const EmployeeDetail = () => {
   const deleteEmployeeAction = useDeleteEmployeeAction();
+  const updateEmployeeAction = useUpdateEmployeeAction();
   const { pathname } = useLocation();
   const router = useHistory();
   const employeeId = pathname.split('/')[2];
@@ -29,21 +37,22 @@ const EmployeeDetail = () => {
   useEffect(() => {
     EmployeeService.fetchEmployee(employeeId).then((res) => {
       setEmployee(res);
+      form.setValues({ name: res.name });
     })
   }, []);
-  
-  const handleEmployeeData = (e: any) => {
-    if (employee) {
-      setEmployee({
-        ...employee,
-        [e.name]: e.value
-      });
-    }
-  };
-  
-  const handleEmployeeUpdate = () => {
 
+  const handleSubmit = async (values: any) => {
+    await updateEmployeeAction(values, employeeId);
+    toast.success('Name is changed!');
   };
+
+  const form = useFormik({
+    validationSchema,
+    initialValues: {
+      name: ''
+    },
+    onSubmit: handleSubmit
+  });
   
   const goBack = () => {
     router.push('/employees');
@@ -78,29 +87,30 @@ const EmployeeDetail = () => {
                     Delete Employee
                 </Button>
             </div>
-            <TextField
-                autoFocus
-                name="name"
-                label="Employee Name"
-                fullWidth
-                variant="standard"
-                value={employee?.name}
-                onChange={(e) => handleEmployeeData(e.target)}
-            />
-            <div className="flex justify-around">
+            <form onSubmit={form.handleSubmit}>
+              <TextField
+                  autoFocus
+                  label="Employee Name"
+                  fullWidth
+                  variant="standard"
+                  {...form.getFieldProps('name')}
+                  helperText={ form.errors.name && form.touched.name ? form.errors.name : '' }
+              />
+              <div className="flex justify-around mt-4">
                 <Button
-                    onClick={handleEmployeeUpdate}
+                    type="submit"
                     variant="contained"
                 >
-                    Update
+                  Update
                 </Button>
                 <Button
                     onClick={goBack}
                     variant="contained"
                 >
-                    Go Back
+                  Go Back
                 </Button>
-            </div>
+              </div>
+            </form>
         </div>
       }
       <Dialog

@@ -1,6 +1,6 @@
 export interface ProjectCreateRequest {
   name: string;
-  budget: number;
+  budget: string;
   client: string;
 }
 
