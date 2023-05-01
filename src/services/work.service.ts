@@ -21,3 +21,16 @@ export async function endWork(work_history_id: string) {
       return Promise.reject();
     })
 }
+
+export async function fetchWorkHistories(query: any) {
+  return apiClient
+    .get('/work-histories', {
+      params: query
+    })
+    .then((response) => {
+      if (response) {
+        return response.data;
+      }
+      return Promise.reject();
+    })
+}
