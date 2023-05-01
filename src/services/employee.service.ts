@@ -2,7 +2,7 @@ import apiClient from '.';
 import {
   EmployeeCreateRequest,
   EmployeeUpdateRequest
-} from "../interfaces";
+} from '../interfaces';
 
 export async function createEmployee(data: EmployeeCreateRequest) {
   return apiClient

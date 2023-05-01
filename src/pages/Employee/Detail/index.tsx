@@ -84,29 +84,29 @@ const EmployeeProjectDetail = () => {
       </div>
       {
         project && project.projectData &&
-          <div className='space-y-6 my-4'>
+          <div className='space-y-6 my-4 p-4 border rounded-lg'>
             <h2 className='font-bold text-xl'>
               Project Name: {project.projectData.name}
             </h2>
             <h2 className='font-bold text-xl'>
               Client: {project.projectData.client.name}
             </h2>
-            <div>
+            <div className='font-bold text-xl'>
               Budget: {project.projectData.budget}
             </div>
-            <div>
+            <div className='font-bold text-xl'>
               Total Hours: {log?.totalHours?.toFixed(3)} (hrs)
             </div>
-            <div>
+            <div className='font-bold text-xl'>
               Total Price: {log?.totalPrice?.toFixed(3)}
             </div>
             {
               project.reservation ? (
                 <>
-                  <div>
+                  <div className='font-bold text-xl'>
                     Status: {project.reservation.status}
                   </div>
-                  <div className='flex justify-center'>
+                  <div className='flex justify-center pt-4'>
                     {
                       isStarted ? (
                         <Button

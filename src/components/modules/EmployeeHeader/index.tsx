@@ -14,7 +14,7 @@ const EmployeeHeader = () => {
           onClick={logout}
         >
           <FaSignOutAlt className='text-white' />
-          <span className="text-xl font-bold">
+          <span className='text-xl font-bold'>
             {account?.name}
           </span>
         </div>

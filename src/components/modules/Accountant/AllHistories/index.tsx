@@ -54,17 +54,17 @@ const AllHistories = () => {
         <tbody>
           {
             histories && histories.length > 0 && histories.map((history) => (
-              <tr key={history._id} className="border">
-                <td className="p-2">
+              <tr key={history._id} className='border'>
+                <td className='p-2'>
                   {history.employee.name}
                 </td>
-                <td className="p-2">
+                <td className='p-2'>
                   {history.project.name}
                 </td>
-                <td className="p-2">
+                <td className='p-2'>
                   {moment(history.startTime).format('hh:mm:ss MMMM, DD, YYYY')}
                 </td>
-                <td className="p-2">
+                <td className='p-2'>
                   {moment(history.endTime).format('hh:mm:ss MMMM, DD, YYYY')}
                 </td>
               </tr>
@@ -74,7 +74,7 @@ const AllHistories = () => {
       </table>
       {
         histories && histories.length === 0 &&
-        <div className="flex justify-center py-8 text-xl font-bold">
+        <div className='flex justify-center py-8 text-xl font-bold'>
           No Data...
         </div>
       }
