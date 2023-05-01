@@ -1,10 +1,10 @@
 import React, { FC } from "react";
-import { EmployeeModel } from "../../../../../resources/models";
+import { UserModel } from "../../../../../resources/models";
 import { FaEdit } from "react-icons/fa";
 import {Link} from "react-router-dom";
 
 interface IEmployeeItemProps {
-  employeeData: EmployeeModel;
+  employeeData: UserModel;
 }
 
 const EmployeeItem: FC<IEmployeeItemProps> = ({ employeeData }) => {

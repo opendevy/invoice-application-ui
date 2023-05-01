@@ -1,5 +1,6 @@
 export interface EmployeeCreateRequest {
   name: string;
+  email: string;
 }
 
 export interface EmployeeUpdateRequest {

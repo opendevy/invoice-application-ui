@@ -1,8 +1,9 @@
 import { EMPLOYEE_ACTIONS } from '../types';
-import { EmployeeModel } from '../../resources/models';
+import {UserModel} from "../../resources/models";
+// import { EmployeeModel } from '../../resources/models';
 
 export interface EmployeeState {
-  employees: EmployeeModel[];
+  employees: UserModel[];
 }
 
 const initialState: EmployeeState = {

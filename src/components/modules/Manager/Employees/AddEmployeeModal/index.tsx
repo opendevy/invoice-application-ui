@@ -19,7 +19,8 @@ const AddEmployeeModal: FC<IAddEmployeeModalProps> = ({
 }) => {
   const addNewEmployee = useCreateEmployeeAction();
   const [newEmployeeData, setNewEmployeeData] = useState<EmployeeCreateRequest>({
-    name: ''
+    name: '',
+    email: ''
   });
 
   const handleClose = () => {
@@ -65,6 +66,16 @@ const AddEmployeeModal: FC<IAddEmployeeModalProps> = ({
             type="text"
             fullWidth
             variant="standard"
+            onChange={(e) => handleNewEmployeeData(e.target)}
+          />
+          <TextField
+            autoFocus
+            name="email"
+            label="Email"
+            type="email"
+            fullWidth
+            variant="standard"
+            sx={{ marginTop: 2 }}
             onChange={(e) => handleNewEmployeeData(e.target)}
           />
         </DialogContent>
