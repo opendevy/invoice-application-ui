@@ -1,7 +1,6 @@
-import React, {FC} from "react";
-import {ProjectModel} from "../../../../resources/models";
+import React, { FC } from "react";
+import { ProjectModel } from "../../../../resources/models";
 import { Link } from 'react-router-dom';
-import {useAuthState} from "../../../../hooks/redux";
 
 interface IProjectInfoCardProps {
   data: ProjectModel;
@@ -21,7 +20,7 @@ const ProjectInfoCard: FC<IProjectInfoCardProps> = ({ data }) => {
           <span>Client: {data.client.name}</span>
         </div>
         <div>
-          <span>Status: Approved</span>
+          <span>Status: </span>
         </div>
       </div>
     </Link>

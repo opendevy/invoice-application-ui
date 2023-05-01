@@ -6,6 +6,13 @@ import store from "./redux/store";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+toast.configure({
+  autoClose: 3000,
+  hideProgressBar: true,
+});
 
 ReactDOM.render(
   <React.StrictMode>

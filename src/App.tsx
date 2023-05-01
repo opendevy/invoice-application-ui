@@ -19,6 +19,7 @@ import EmployeeDetail from "./pages/Employees/EmployeeDetail";
 import EmployeeLayout from "./components/layout/EmployeeLayout";
 import EmployeeProjects from "./pages/Employee/Projects";
 import EmployeeProjectDetail from "./pages/Employee/Detail";
+import {AccountProvider} from "./context/account.context";
 
 const theme = createTheme({});
 
@@ -28,49 +29,51 @@ const App = memo(() => {
   return (
     <ThemeProvider theme={theme}>
       <AuthProvider>
-        {
-          account ? (
-            account.permission === 'manager' ? (
-              <FullLayout>
-                <Switch>
-                  <Route exact path={ROUTES.CLIENT} component={Clients} />
-                  <Route exact path={ROUTES.EMPLOYEE} component={Employees} />
-                  <Route path={ROUTES.EMPLOYEE_DETAIL} component={EmployeeDetail} />
-                  <Route exact path={ROUTES.PROJECT} component={ProjectPage} />
-                  <Route path={ROUTES.PROJECT_DETAIL} component={ProjectDetail} />
-                  <Redirect to={ROUTES.CLIENT} />
-                </Switch>
-              </FullLayout>
-            ) : (
-              account.permission === 'accountant' ? (
+        <AccountProvider>
+          {
+            account ? (
+              account.permission === 'manager' ? (
                 <FullLayout>
                   <Switch>
-                    <Route exact path={ROUTES.ACCOUNTANT} component={Accountant} />
-                    <Redirect to={ROUTES.ACCOUNTANT} />
+                    <Route exact path={ROUTES.CLIENT} component={Clients} />
+                    <Route exact path={ROUTES.EMPLOYEE} component={Employees} />
+                    <Route path={ROUTES.EMPLOYEE_DETAIL} component={EmployeeDetail} />
+                    <Route exact path={ROUTES.PROJECT} component={ProjectPage} />
+                    <Route path={ROUTES.PROJECT_DETAIL} component={ProjectDetail} />
+                    <Redirect to={ROUTES.CLIENT} />
                   </Switch>
                 </FullLayout>
               ) : (
-                <EmployeeLayout>
-                  <Switch>
-                    <Route exact path={ROUTES.EMPLOYEE_PROJECT} component={EmployeeProjects} />
-                    <Route exact path={ROUTES.EMPLOYEE_PROJECT_DETAIL} component={EmployeeProjectDetail} />
-                    <Redirect to={ROUTES.EMPLOYEE_PROJECT} />
-                  </Switch>
-                </EmployeeLayout>
+                account.permission === 'accountant' ? (
+                  <FullLayout>
+                    <Switch>
+                      <Route exact path={ROUTES.ACCOUNTANT} component={Accountant} />
+                      <Redirect to={ROUTES.ACCOUNTANT} />
+                    </Switch>
+                  </FullLayout>
+                ) : (
+                  <EmployeeLayout>
+                    <Switch>
+                      <Route exact path={ROUTES.EMPLOYEE_PROJECT} component={EmployeeProjects} />
+                      <Route exact path={ROUTES.EMPLOYEE_PROJECT_DETAIL} component={EmployeeProjectDetail} />
+                      <Redirect to={ROUTES.EMPLOYEE_PROJECT} />
+                    </Switch>
+                  </EmployeeLayout>
+                )
               )
+            ) : (
+              <AuthLayout>
+                <Switch>
+                  <Route exact path={ROUTES.AUTH.REGISTER} component={Register} />
+                  <Route exact path={ROUTES.AUTH.LOGIN} component={Login} />
+                  <Route exact path={ROUTES.AUTH.FORGOT_PASSWORD} component={ForgotPassword} />
+                  <Route exact path={ROUTES.AUTH.RESET_PASSWORD} component={ResetPassword} />
+                  <Redirect to={ROUTES.AUTH.LOGIN} />
+                </Switch>
+              </AuthLayout>
             )
-          ) : (
-            <AuthLayout>
-              <Switch>
-                <Route exact path={ROUTES.AUTH.REGISTER} component={Register} />
-                <Route exact path={ROUTES.AUTH.LOGIN} component={Login} />
-                <Route exact path={ROUTES.AUTH.FORGOT_PASSWORD} component={ForgotPassword} />
-                <Route exact path={ROUTES.AUTH.RESET_PASSWORD} component={ResetPassword} />
-                <Redirect to={ROUTES.AUTH.LOGIN} />
-              </Switch>
-            </AuthLayout>
-          )
-        }
+          }
+        </AccountProvider>
       </AuthProvider>
     </ThemeProvider>
   );
